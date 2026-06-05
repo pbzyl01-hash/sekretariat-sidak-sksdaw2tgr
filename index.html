@@ -3,1093 +3,843 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIDAK KSDAE - Data Sekretariat</title>
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+  <title>SIDAK KSDAE - Seksi KSDA Wilayah II Tenggarong</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          animation: {
+            'pulse-glow': 'pulseGlow 2.5s infinite alternate',
+          },
+          keyframes: {
+            pulseGlow: {
+              '0%': {
+                'text-shadow': '0 0 10px rgba(56, 189, 248, 0.6), 0 0 20px rgba(56, 189, 248, 0.4)',
+                transform: 'scale(1)'
+              },
+              '100%': {
+                'text-shadow': '0 0 25px rgba(56, 189, 248, 0.9), 0 0 40px rgba(14, 165, 233, 0.7)',
+                transform: 'scale(1.02)'
+              }
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root {
-      /* Mode Terang (Default) */
-      --bg-primary: #F8FAFC;
-      --bg-secondary: #FFFFFF;
-      --bg-card: #FFFFFF;
-      --bg-hover: #F1F5F9;
-      --accent: #0EA5E9; /* Ocean Blue */
-      --accent-light: #38BDF8;
-      --accent-glow: rgba(14, 165, 233, 0.2);
-      --text-primary: #0F172A;
-      --text-secondary: #475569;
-      --text-muted: #94A3B8;
-      --border: rgba(0, 0, 0, 0.06);
-      --border-strong: rgba(0, 0, 0, 0.12);
-      --success: #10B981;
-      --danger: #EF4444;
-      --warning: #F59E0B;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
-      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
-      --radius-sm: 6px;
-      --radius-md: 10px;
-      --radius-lg: 16px;
-      --radius-xl: 24px;
-      --font-main: 'Inter', sans-serif;
-      --font-display: 'Sora', sans-serif;
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
     }
-
-    .dark-mode {
-      /* Mode Gelap */
-      --bg-primary: #0B0F19;
-      --bg-secondary: #111827;
-      --bg-card: #1F2937;
-      --bg-hover: #374151;
-      --accent: #0EA5E9;
-      --accent-light: #38BDF8;
-      --accent-glow: rgba(14, 165, 233, 0.3);
-      --text-primary: #F9FAFB;
-      --text-secondary: #9CA3AF;
-      --text-muted: #6B7280;
-      --border: rgba(255, 255, 255, 0.07);
-      --border-strong: rgba(255, 255, 255, 0.15);
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
-      --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+    ::-webkit-scrollbar-track {
+      background: transparent;
     }
-
-    body {
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      font-family: var(--font-main);
-      transition: background 0.3s ease, color 0.3s ease;
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
     }
-
-    h1, h2, h3, h4 {
-      font-family: var(--font-display);
-    }
-
-    /* Glowing & Pulsing Animation for Main Header */
-    @keyframes pulsingGlow {
-      0% {
-        text-shadow: 0 0 15px rgba(14, 165, 233, 0.5), 0 0 30px rgba(14, 165, 233, 0.3);
-        transform: scale(1);
-      }
-      50% {
-        text-shadow: 0 0 35px rgba(14, 165, 233, 0.95), 0 0 60px rgba(56, 189, 248, 0.7);
-        transform: scale(1.02);
-      }
-      100% {
-        text-shadow: 0 0 15px rgba(14, 165, 233, 0.5), 0 0 30px rgba(14, 165, 233, 0.3);
-        transform: scale(1);
-      }
-    }
-
-    .pulsing-glow-header {
-      animation: pulsingGlow 3s infinite ease-in-out;
-      color: #38BDF8;
-      font-weight: 850;
-      letter-spacing: -0.01em;
-      text-transform: uppercase;
-      filter: drop-shadow(0 2px 8px rgba(14, 165, 233, 0.2));
-    }
-
-    .btn-theme {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      transition: all 0.2s ease;
-    }
-    .btn-theme:hover {
-      background: var(--bg-hover);
-      border-color: var(--border-strong);
-    }
-
-    .active-tab {
-      background: var(--accent);
-      color: #ffffff !important;
-      box-shadow: 0 4px 14px var(--accent-glow);
-    }
-
-    .glass-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .glass-card:hover {
-      box-shadow: var(--shadow-lg);
-      border-color: var(--border-strong);
-    }
-
-    .form-input-custom {
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      border-radius: var(--radius-md);
-      transition: all 0.2s ease;
-    }
-    .form-input-custom:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-    }
-    .form-input-custom[readonly] {
-      background-color: rgba(148, 163, 184, 0.1);
-      border-color: var(--border);
-      cursor: not-allowed;
-      opacity: 0.85;
-    }
-
-    /* Skeleton Animation */
-    .skeleton {
-      background: linear-gradient(90deg, var(--bg-hover) 25%, var(--bg-card) 50%, var(--bg-hover) 75%);
-      background-size: 200% 100%;
-      animation: skeleton-wave 1.5s infinite;
-    }
-    @keyframes skeleton-wave {
-      to { background-position: -200% 0; }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #475569;
     }
   </style>
 </head>
-<body class="min-height-screen pb-16">
+<body class="bg-slate-50 text-slate-800 font-sans transition-colors duration-300 min-h-screen flex flex-col dark:bg-slate-950 dark:text-slate-100">
 
-  <!-- BANNER PETUNJUK SETUP (Akan muncul jika URL GAS masih bawaan/placeholder) -->
-  <div id="setupAssistantBanner" class="hidden bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-amber-500/20 border-b border-amber-500/30 py-4 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-      <div class="flex items-start gap-3">
-        <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-500 flex items-center justify-center shrink-0 mt-0.5">
-          <i class="fa-solid fa-triangle-exclamation text-lg"></i>
-        </div>
-        <div>
-          <h4 class="text-sm font-bold text-amber-500">Asisten Konfigurasi Terdeteksi</h4>
-          <p class="text-xs text-slate-400 mt-0.5">Anda melihat pesan ini karena <code class="bg-black/30 px-1 py-0.5 rounded text-amber-400">GAS_URL</code> di dalam file HTML Anda masih menggunakan nilai default. Ikuti petunjuk di bawah untuk menghubungkan database Anda.</p>
-        </div>
-      </div>
-      <div class="flex flex-wrap gap-2 shrink-0">
-        <a href="https://script.google.com" target="_blank" class="px-3 py-1.5 text-xs font-bold rounded-md bg-amber-500 hover:bg-amber-600 text-white transition-all flex items-center gap-1.5 shadow-sm">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Google Apps Script
-        </a>
+  <!-- TOP HEADER (Neon Pulse Effect) -->
+  <header class="bg-slate-900 border-b border-slate-800 text-white py-6 px-4 text-center relative overflow-hidden shadow-xl">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-900/40 via-transparent to-emerald-900/40 pointer-events-none"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center">
+      <!-- Glow & Pulsing Title -->
+      <h1 class="text-3xl md:text-5xl font-extrabold tracking-wider text-sky-400 select-none animate-pulse-glow transition-all duration-300">
+        DATA SEKRETARIAT
+      </h1>
+      <!-- Sub-header -->
+      <p class="text-xs md:text-sm tracking-widest text-slate-400 font-semibold mt-2 uppercase">
+        Seksi KSDA Wilayah II Tenggarong • 2026
+      </p>
+    </div>
+
+    <!-- Mode Gelap/Terang Switch Button (Top Right) -->
+    <button id="themeToggleBtn" onclick="toggleTheme()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-slate-800 hover:bg-slate-700 text-yellow-400 p-2.5 rounded-full transition-all border border-slate-700 focus:outline-none" title="Ubah Tema">
+      <i class="fa-solid fa-moon text-lg" id="themeIcon"></i>
+    </button>
+  </header>
+
+  <!-- ERROR NOTIFICATION BANNER (Google Drive Folder ID Catcher) -->
+  <div id="setupWarningBanner" class="hidden bg-amber-50 border-b border-amber-200 p-4 transition-all dark:bg-amber-950/40 dark:border-amber-900/60">
+    <div class="max-w-7xl mx-auto flex items-start gap-3">
+      <span class="text-amber-600 dark:text-amber-400 mt-0.5"><i class="fa-solid fa-triangle-exclamation text-xl"></i></span>
+      <div class="flex-1">
+        <h3 class="font-bold text-amber-900 dark:text-amber-300">ID Spreadsheet Terdeteksi Menggunakan ID Folder!</h3>
+        <p class="text-sm text-amber-700 dark:text-amber-400 mt-1">
+          Sistem mendeteksi bahwa tautan/ID yang dipasang di <code class="font-mono bg-amber-100 px-1 rounded dark:bg-slate-800 text-red-600 dark:text-red-400">Code.gs</code> merupakan Google Drive Folder ID. Agar data dapat masuk ke basis data, harap buat satu berkas <strong>Google Spreadsheet baru</strong> di dalam folder tersebut, lalu salin ID unik spreadsheet-nya (terletak di antara <code class="font-mono">/d/</code> dan <code class="font-mono">/edit</code> pada URL browser Anda) dan pasang di <code class="font-mono">Code.gs</code>.
+        </p>
+        <p class="text-xs text-amber-600 dark:text-amber-500 mt-2 font-medium">
+          Folder Drive Penyimpanan: <a href="https://drive.google.com/drive/folders/1PgPHxhgvz9n_Rr0JmaTnVq1ZhQay-uV?usp=drive_link" target="_blank" class="underline hover:text-amber-800 dark:hover:text-amber-300">Buka Drive Penyimpanan Resmi <i class="fa-solid fa-external-link"></i></a>
+        </p>
       </div>
     </div>
   </div>
 
-  <!-- NAV BAR -->
-  <nav class="sticky top-0 z-40 w-full backdrop-blur-md bg-opacity-80 border-b transition-colors duration-200" style="background-color: rgba(var(--bg-card), 0.8); border-color: var(--border);">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-sky-500 flex items-center justify-center text-white shadow-md">
-          <i class="fa-solid fa-server text-xl"></i>
-        </div>
-        <div>
-          <span class="font-bold text-lg tracking-tight block">SIDAK KSDAE</span>
-          <span class="text-[10px] text-slate-500 font-semibold block tracking-wider">KEMENHUT REPUBLIK INDONESIA</span>
-        </div>
-      </div>
-      
-      <div class="flex items-center gap-3">
-        <!-- Google Drive Storage Button -->
-        <a href="https://drive.google.com/drive/folders/1PgPHxhgvz9n_Rr0JmaTnVq1ZhQayz-uV?usp=drive_link" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg text-amber-600 bg-amber-500/10 hover:bg-amber-500/20 transition-all border border-amber-500/30">
-          <i class="fa-brands fa-google-drive text-sm"></i>
-          <span>Folder Penyimpanan Otomatis</span>
-        </a>
-        
-        <!-- Theme Toggle -->
-        <button id="themeToggle" class="w-10 h-10 rounded-lg btn-theme flex items-center justify-center cursor-pointer" aria-label="Toggle Theme">
-          <i id="themeIcon" class="fa-solid fa-moon"></i>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO HEADER SECTION -->
-  <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8 text-center">
-    <h1 class="text-5xl sm:text-6xl md:text-7xl font-black pulsing-glow-header py-1 tracking-tight">
-      Data Sekretariat
-    </h1>
-    <p class="text-sm sm:text-base md:text-lg font-bold tracking-widest mt-4 text-slate-400 uppercase">
-      Seksi KSDA Wilayah II Tenggarong • 2026
-    </p>
+  <!-- MAIN APP CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
     
-    <!-- Link Drive Mobile Only -->
-    <div class="mt-4 sm:hidden">
-      <a href="https://drive.google.com/drive/folders/1PgPHxhgvz9n_Rr0JmaTnVq1ZhQayz-uV?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg text-amber-600 bg-amber-500/10 hover:bg-amber-500/20 transition-all border border-amber-500/30">
-        <i class="fa-brands fa-google-drive"></i>
-        <span>Folder Penyimpanan Otomatis</span>
-      </a>
-    </div>
-  </header>
-
-  <!-- MAIN BODY CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- LEFT SIDEBAR: NAVIGASI MODUL -->
+    <aside class="lg:col-span-1 flex flex-col gap-4">
       
-      <!-- LEFT COLUMN: Module Sidebar -->
-      <aside class="lg:col-span-4 flex flex-col gap-4">
-        <div class="glass-card p-6">
-          <h2 class="text-base font-bold mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-folder-open text-sky-500"></i>
-            Daftar Modul Pelaporan
-          </h2>
-          
-          <!-- PENYARING PERIODE WIDGET -->
-          <div class="mb-5 bg-slate-500/5 p-2 rounded-xl border border-slate-500/10">
-            <span class="text-[10px] uppercase tracking-wider font-extrabold text-slate-400 block mb-2 px-1">Penyaring Periode</span>
-            <div class="grid grid-cols-3 gap-1 bg-slate-500/10 p-1 rounded-lg text-xs" id="periodFilterBar">
-              <button onclick="setPeriodFilter('Semua')" id="btn-period-semua" class="py-1.5 rounded-md font-bold transition-all text-center cursor-pointer bg-sky-500 text-white shadow-sm">Semua</button>
-              <button onclick="setPeriodFilter('Bulanan')" id="btn-period-bulan" class="py-1.5 rounded-md font-bold transition-all text-center cursor-pointer text-slate-400 hover:text-slate-200">Bulan</button>
-              <button onclick="setPeriodFilter('Tahunan')" id="btn-period-tahun" class="py-1.5 rounded-md font-bold transition-all text-center cursor-pointer text-slate-400 hover:text-slate-200">Tahun</button>
-            </div>
-          </div>
-          
-          <!-- LIST MODUL -->
-          <div class="flex flex-col gap-2" id="modulesList">
-            <!-- Modul F.08 (Bulanan) -->
-            <div class="p-1 border-b border-dashed" style="border-color: var(--border);" id="section-monthly">
-              <span class="text-[10px] uppercase tracking-wider font-extrabold text-amber-500 flex items-center gap-1 mb-2">
-                <i class="fa-solid fa-clock-rotate-left"></i> Laporan Bulanan (Monthly)
-              </span>
-              <button onclick="switchModule('F08')" id="btn-F08" class="w-full text-left p-3 rounded-lg text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer" style="color: var(--text-secondary); background: var(--bg-primary);">
-                <span class="w-8 h-8 rounded bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold">F.08</span>
-                <span class="truncate">Perijinan Masuk Kawasan Konservasi</span>
-              </button>
-            </div>
-
-            <!-- Modul F.01 - F.07 (Tahunan) -->
-            <div class="p-1 mt-2" id="section-yearly">
-              <span class="text-[10px] uppercase tracking-wider font-extrabold text-sky-500 flex items-center gap-1 mb-2">
-                <i class="fa-solid fa-calendar-days"></i> Laporan Tahunan (Annual)
-              </span>
-              <div class="flex flex-col gap-2 max-h-[350px] overflow-y-auto pr-1">
-                <!-- F01 -->
-                <button onclick="switchModule('F01')" id="btn-F01" class="w-full text-left p-3 rounded-lg text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer" style="color: var(--text-secondary); background: var(--bg-primary);">
-                  <span class="w-8 h-8 rounded bg-sky-500/10 text-sky-500 flex items-center justify-center font-bold">F.01</span>
-                  <span class="truncate">PNS/CPNS Menurut Jabatan & Sex</span>
-                </button>
-                <!-- F02 -->
-                <button onclick="switchModule('F02')" id="btn-F02" class="w-full text-left p-3 rounded-lg text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer" style="color: var(--text-secondary); background: var(--bg-primary);">
-                  <span class="w-8 h-8 rounded bg-sky-500/10 text-sky-500 flex items-center justify-center font-bold">F.02</span>
-                  <span class="truncate">PNS/CPNS Menurut Pendidikan & Sex</span>
-                </button>
-                <!-- F03 -->
-                <button onclick="switchModule('F03')" id="btn-F03" class="w-full text-left p-3 rounded-lg text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer" style="color: var(--text-secondary); background: var(--bg-primary);">
-                  <span class="w-8 h-8 rounded bg-sky-500/10 text-sky-500 flex items-center justify-center font-bold">F.03</span>
-                  <span class="truncate">PNS/CPNS Menurut Golongan & Sex</span>
-                </button>
-                <!-- F04 -->
-                <button onclick="switchModule('F04')" id="btn-F04" class="w-full text-left p-3 rounded-lg text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer" style="color: var(--text-secondary); background: var(--bg-primary);">
-                  <span class="w-8 h-8 rounded bg-sky-500/10 text-sky-500 flex items-center justify-center font-bold">F.04</span>
-                  <span class="truncate">Pejabat Fungsional Tertentu Menurut Fungsi</span>
-                </button>
-                <!-- F05 -->
-                <button onclick="switchModule('F05')" id="btn-F05" class="w-full text-left p-3 rounded-lg text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer" style="color: var(--text-secondary); background: var(--bg-primary);">
-                  <span class="w-8 h-8 rounded bg-sky-500/10 text-sky-500 flex items-center justify-center font-bold">F.05</span>
-                  <span class="truncate">Fungsional Menurut Pendidikan & Fungsi</span>
-                </button>
-                <!-- F06 -->
-                <button onclick="switchModule('F06')" id="btn-F06" class="w-full text-left p-3 rounded-lg text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer" style="color: var(--text-secondary); background: var(--bg-primary);">
-                  <span class="w-8 h-8 rounded bg-sky-500/10 text-sky-500 flex items-center justify-center font-bold">F.06</span>
-                  <span class="truncate">ASN P3K Menurut Pendidikan & Sex</span>
-                </button>
-                <!-- F07 -->
-                <button onclick="switchModule('F07')" id="btn-F07" class="w-full text-left p-3 rounded-lg text-sm font-semibold transition-all flex items-center gap-3 cursor-pointer" style="color: var(--text-secondary); background: var(--bg-primary);">
-                  <span class="w-8 h-8 rounded bg-sky-500/10 text-sky-500 flex items-center justify-center font-bold">F.07</span>
-                  <span class="truncate">Kerja Sama Teknik Bidang KSDAE</span>
-                </button>
-              </div>
-            </div>
-          </div>
+      <!-- Filter Periode Tab -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-3 dark:bg-slate-900 dark:border-slate-800/80">
+        <label class="block text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2.5 px-1">Periode Laporan</label>
+        <div class="grid grid-cols-3 gap-1">
+          <button onclick="setPeriodFilter('all')" id="filter-all" class="text-xs font-semibold py-1.5 px-3 rounded-lg transition-all bg-sky-500 text-white">Semua</button>
+          <button onclick="setPeriodFilter('monthly')" id="filter-monthly" class="text-xs font-semibold py-1.5 px-3 rounded-lg transition-all text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800">Bulanan</button>
+          <button onclick="setPeriodFilter('yearly')" id="filter-yearly" class="text-xs font-semibold py-1.5 px-3 rounded-lg transition-all text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800">Tahunan</button>
         </div>
-      </aside>
+      </div>
 
-      <!-- RIGHT COLUMN: Dynamic Form and Data View -->
-      <section class="lg:col-span-8 flex flex-col gap-6">
+      <!-- Module Menu List -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-3 flex flex-col gap-1 dark:bg-slate-900 dark:border-slate-800/80" id="moduleMenuList">
+        <!-- Renders dynamically -->
+      </div>
+    </aside>
+
+    <!-- RIGHT SECTION: FORM & DATABASE VIEW -->
+    <section class="lg:col-span-3 flex flex-col gap-6">
+
+      <!-- ALERT MESSAGE BOX -->
+      <div id="alertBox" class="hidden transition-all duration-300 transform scale-95 p-4 rounded-xl flex items-start gap-3 border shadow-sm">
+        <span id="alertIcon" class="text-lg"></span>
+        <div class="flex-1">
+          <p id="alertMessage" class="text-sm font-semibold"></p>
+        </div>
+        <button onclick="hideAlert()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- FORM CARD -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden dark:bg-slate-900 dark:border-slate-800/80 relative">
+        <!-- Corner badge dinamis -->
+        <span id="formPeriodBadge" class="absolute top-4 right-4 text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full tracking-wider shadow-sm z-10 transition-colors">
+          Tahunan
+        </span>
         
-        <!-- CARD FORMULIR DINAMIS DENGAN OVERLAPPING BADGE -->
-        <div id="formSection" class="glass-card p-6 relative overflow-hidden">
-          
-          <!-- Absolute Badge in Top Right Corner -->
-          <div id="formPeriodBadge" class="absolute top-0 right-0 px-4 py-1.5 text-[10px] font-bold tracking-wider rounded-bl-xl rounded-tr-none text-white uppercase bg-emerald-500 shadow-sm z-10">
-            F.08 - BULANAN
-          </div>
-
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-4 mb-6" style="border-color: var(--border);">
-            <div class="pr-20">
-              <h2 id="formTitle" class="text-xl font-extrabold mt-2 leading-tight">
-                F.08 - Perijinan Masuk Kawasan Konservasi
-              </h2>
-            </div>
-            <!-- Indicator API Connection -->
-            <div id="connectionStatus" class="flex items-center gap-2 mt-3 sm:mt-0 text-[11px] font-bold text-slate-400 shrink-0">
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-400 inline-block animate-pulse"></span>
-              <span>Menghubungkan...</span>
-            </div>
-          </div>
-
-          <!-- EDIT STATE BANNER INDICATOR -->
-          <div id="editModeIndicator" class="hidden mb-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg flex justify-between items-center text-xs font-semibold text-amber-500">
-            <span class="flex items-center gap-2">
-              <i class="fa-solid fa-pen-to-square animate-pulse"></i>
-              <span>Mode Edit Aktif: Memperbarui Baris Terpilih</span>
-            </span>
-            <button type="button" onclick="cancelEditMode()" class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 hover:text-rose-500 bg-slate-500/10 rounded-md transition-all">
-              Batal Edit
-            </button>
-          </div>
-
-          <!-- DYNAMIC FORM CONTAINER -->
-          <form id="mainDynamicForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
-            <!-- Container input fields generator -->
-            <div id="dynamicFieldsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- JS akan memasukkan input fields spesifik modul di sini -->
-            </div>
-
-            <!-- BUTTON ACTIONS -->
-            <div class="flex justify-end gap-3 pt-4 border-t mt-6" style="border-color: var(--border);">
-              <button type="reset" onclick="cancelEditMode()" class="btn-theme px-5 py-2.5 rounded-lg font-semibold text-sm cursor-pointer">
-                <i class="fa-solid fa-rotate-left mr-2"></i>Reset Form
-              </button>
-              <button type="submit" id="btnSubmitForm" class="px-5 py-2.5 bg-sky-500 hover:bg-sky-600 text-white rounded-lg font-semibold text-sm flex items-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer">
-                <i class="fa-solid fa-paper-plane"></i><span id="submitBtnText">Kirim Isian Data</span>
-              </button>
-            </div>
-          </form>
+        <div class="border-b border-slate-100 px-6 py-4 dark:border-slate-800">
+          <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 dark:text-white">
+            <span class="p-1.5 rounded-lg bg-sky-50 text-sky-500 dark:bg-sky-950/40"><i class="fa-solid fa-file-invoice"></i></span>
+            Isi Laporan <span id="formModuleTitle"></span>
+          </h2>
         </div>
 
-        <!-- VIEW RECORDED DATA IN TABLE -->
-        <div class="glass-card p-6">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-            <div>
-              <h2 id="tableTitle" class="text-lg font-bold flex items-center gap-2">
-                <i class="fa-solid fa-database text-sky-500"></i>
-                Database: F.08 Perijinan Masuk Kawasan Konservasi
-              </h2>
-              <p class="text-xs text-slate-400 mt-1">Hanya menampilkan data yang terekam pada sheet aktif</p>
-            </div>
-            
-            <!-- Search bar -->
-            <div class="relative max-w-xs w-full">
-              <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-              <input type="text" id="tableSearch" placeholder="Cari data..." class="w-full pl-9 pr-4 py-2 text-sm rounded-lg form-input-custom" oninput="filterTableData()">
-            </div>
-          </div>
+        <form id="moduleEntryForm" onsubmit="handleFormSubmit(event)" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Dynamic Form Inputs go here -->
+        </form>
+      </div>
 
-          <!-- Table Container -->
-          <div class="overflow-x-auto rounded-lg border" style="border-color: var(--border);">
-            <table class="w-full text-left text-sm" id="dataTable">
-              <thead class="bg-slate-500/5 text-slate-400 uppercase tracking-wider text-xs font-bold border-b" style="border-color: var(--border);">
-                <tr id="tableHeaderRow">
-                  <!-- JS Injection -->
-                </tr>
-              </thead>
-              <tbody class="divide-y" id="tableBody" style="divide-color: var(--border);">
-                <!-- JS Injection -->
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Empty / Skeleton State visualizer -->
-          <div id="tableEmptyState" class="hidden text-center py-10">
-            <i class="fa-solid fa-folder-open text-slate-400 text-4xl mb-3 block"></i>
-            <span class="text-slate-400 text-sm font-medium">Belum ada data untuk modul aktif</span>
-          </div>
-          
-          <div id="tableLoadingState" class="hidden space-y-3 py-6">
-            <div class="h-10 skeleton w-full"></div>
-            <div class="h-10 skeleton w-full"></div>
-            <div class="h-10 skeleton w-full"></div>
-          </div>
+      <!-- DATABASE SECTION -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden dark:bg-slate-900 dark:border-slate-800/80">
+        <div class="border-b border-slate-100 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 dark:border-slate-800">
+          <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 dark:text-white" id="databaseTableTitle">
+            Database: F01_Jabatan
+          </h2>
+          <button onclick="fetchDatabaseData()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 py-1.5 px-3 rounded-lg font-semibold flex items-center gap-1.5 transition dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-300">
+            <i class="fa-solid fa-sync" id="refreshBtnIcon"></i> Segarkan Data
+          </button>
         </div>
 
-      </section>
-    </div>
+        <!-- Scrollable Table -->
+        <div class="overflow-x-auto w-full">
+          <table class="w-full text-left text-xs border-collapse" id="databaseTable">
+            <!-- Renders dynamically -->
+          </table>
+        </div>
+
+        <!-- No Data State -->
+        <div id="noDataPlaceholder" class="p-12 text-center text-slate-400 flex flex-col items-center justify-center gap-2">
+          <i class="fa-solid fa-folder-open text-4xl text-slate-300 dark:text-slate-700"></i>
+          <p class="font-medium text-slate-500 dark:text-slate-400">Belum ada data terekam di sheet ini.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- CUSTOM CONFIRMATION MODAL (Strict replacement for standard confirm prompt) -->
-  <div id="customConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
-    <div class="bg-[var(--bg-card)] border border-[var(--border-strong)] rounded-2xl max-w-sm w-full p-6 shadow-2xl transform scale-95 transition-all duration-300">
-      <div class="text-rose-500 text-4xl mb-4 flex justify-center">
-        <i class="fa-solid fa-triangle-exclamation"></i>
+  <!-- CONFIRMATION DELETE CUSTOM MODAL -->
+  <div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm hidden">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-sm rounded-2xl shadow-xl overflow-hidden transform scale-95 transition-all border border-slate-200 dark:border-slate-800">
+      <div class="p-6 text-center">
+        <span class="inline-flex items-center justify-center p-3 bg-red-50 text-red-600 rounded-full mb-4 dark:bg-red-950/40 dark:text-red-400">
+          <i class="fa-solid fa-trash-can text-2xl"></i>
+        </span>
+        <h3 class="text-base font-bold text-slate-900 dark:text-white">Konfirmasi Hapus Data</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Apakah Anda yakin ingin menghapus data ini secara permanen dari basis data Google Sheet? Tindakan ini tidak dapat dibatalkan.</p>
       </div>
-      <h3 class="text-lg font-bold text-center mb-2 text-[var(--text-primary)]">Hapus Data?</h3>
-      <p class="text-sm text-center text-[var(--text-secondary)] mb-6">Apakah Anda yakin ingin menghapus data isian ini secara permanen dari basis data Spreadsheet?</p>
-      <div class="flex gap-3 justify-center">
-        <button id="cancelConfirmBtn" class="px-4 py-2 text-sm font-semibold rounded-lg btn-theme cursor-pointer">Batal</button>
-        <button id="okConfirmBtn" class="px-4 py-2 text-sm font-semibold text-white bg-rose-500 hover:bg-rose-600 rounded-lg cursor-pointer animate-pulse">Ya, Hapus</button>
+      <div class="bg-slate-50 dark:bg-slate-800/40 px-6 py-3.5 flex gap-3 justify-end border-t border-slate-100 dark:border-slate-800">
+        <button onclick="closeDeleteModal()" class="text-xs font-semibold py-2 px-4 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700">Batal</button>
+        <button id="confirmDeleteBtn" class="text-xs font-semibold py-2 px-4 rounded-lg bg-red-600 text-white hover:bg-red-700 shadow-sm">Hapus Sekarang</button>
       </div>
     </div>
   </div>
 
   <!-- FOOTER -->
-  <footer class="mt-16 py-6 border-t text-center text-xs text-slate-400 font-medium" style="border-color: var(--border);">
-    <div class="max-w-7xl mx-auto px-4">
-      <p class="mb-1">©2026 Web Sekretariat. Data Isian disesuaikan dengan SIDAK KSDAE KEMENHUT.</p>
-      <p>Mendukung Integrasi Otomatis Google Drive & Spreadsheet untuk Transparansi Maksimal.</p>
+  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-center py-5 px-4 text-xs mt-12">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      <p>©2026 Web Sekretariat. Data Isian disesuaikan dengan SIDAK KSDAE KEMENHUT.</p>
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <p class="text-[10px] uppercase font-bold tracking-wider text-slate-500">Koneksi Otomatis Cloud Sheet Terintegrasi</p>
+      </div>
     </div>
   </footer>
 
-  <!-- JAVASCRIPT CONTROLLER -->
+  <!-- SCRIPT LOGIC -->
   <script>
-    // URL Google Apps Script Web App (PASTIKAN UNTUK MENGGANTI URL DI BAWAH DENGAN URL DEPLOYMENT ANDA)
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwL5mPkPXUnsKPQ-_OasSdlMP-0CqyPQkQ5c3jHMfbCghFowB5vrRAf1wOzUNmB4hdV1Q/exec'; 
+    // =================================================================================
+    // API INTEGRATION & LOCAL DATA STORAGE
+    // =================================================================================
+    // Tempelkan URL deployment Web App Google Apps Script Anda di sini.
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwL5mPkPXUnsKPQ-_OasSdlMP-0CqyPQkQ5c3jHMfbCghFowB5vrRAf1wOzUNmB4hdV1Q/exec';
 
-    // Current State Management
-    let currentModule = 'F08';
-    let dbData = [];
-    let activePeriodFilter = 'Semua';
-    let editMode = false;
-    let editId = null;
-
-    // Delete flow temporary state
-    let targetDeleteId = null;
-
-    // Metadatabase Modul & Skema Formulir (Telah disesuaikan secara presisi dengan berkas template)
-    const MODULES_CONFIG = {
+    // Konfigurasi Metadata Modul
+    const MODULES = {
       'F01': {
-        name: 'F.01 Sebaran PNS/CPNS Menurut Jabatan dan Jenis Kelamin',
-        filename: 'F.01 Template - Sebaran PNS_CPNS Menurut Jabatan dan Jenis Kelamin.xlsx',
-        period: 'Tahunan',
+        code: 'F.01',
+        name: 'Sebaran PNS/CPNS Menurut Jabatan',
+        period: 'yearly',
         fields: [
-          { name: 'satker', label: 'Satuan Kerja', type: 'text', val: 'Balai KSDA Kalimantan Timur', readonly: true, required: true },
-          { name: 'jabatan', label: 'Jabatan / Golongan Tugas', type: 'select', options: ['Kepala Balai (Struktural)', 'Kepala Sub Bagian (Struktural)', 'Kepala Seksi Wilayah (Struktural)', 'Fungsional Umum / Pelaksana', 'Fungsional Tertentu (Polhut)', 'Fungsional Tertentu (PEH)', 'Fungsional Tertentu (Penyuluh)', 'Fungsional Tertentu (Lainnya)'], required: true },
-          { name: 'laki_laki', label: 'Jumlah Laki-laki', type: 'number', min: 0, required: true },
-          { name: 'perempuan', label: 'Jumlah Perempuan', type: 'number', min: 0, required: true },
-          { name: 'tahun', label: 'Tahun Laporan', type: 'number', val: 2026, required: true }
+          { name: 'Tahun', label: 'Tahun', type: 'number', placeholder: '2026', required: true },
+          { name: 'Periode', label: 'Periode', type: 'text', value: 'Tahunan', readonly: true },
+          { name: 'Satuan Kerja', label: 'Satuan Kerja', type: 'text', value: 'Balai KSDA Kalimantan Timur', readonly: true },
+          { name: 'Struktural I-A (Laki-laki)', label: 'Struktural I-A (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Struktural I-A (Perempuan)', label: 'Struktural I-A (Perempuan)', type: 'number', value: 0 },
+          { name: 'Struktural I-B (Laki-laki)', label: 'Struktural I-B (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Struktural I-B (Perempuan)', label: 'Struktural I-B (Perempuan)', type: 'number', value: 0 },
+          { name: 'Struktural II-A (Laki-laki)', label: 'Struktural II-A (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Struktural II-A (Perempuan)', label: 'Struktural II-A (Perempuan)', type: 'number', value: 0 },
+          { name: 'Struktural II-B (Laki-laki)', label: 'Struktural II-B (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Struktural II-B (Perempuan)', label: 'Struktural II-B (Perempuan)', type: 'number', value: 0 },
+          { name: 'Struktural III-A (Laki-laki)', label: 'Struktural III-A (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Struktural III-A (Perempuan)', label: 'Struktural III-A (Perempuan)', type: 'number', value: 0 },
+          { name: 'Struktural III-B (Laki-laki)', label: 'Struktural III-B (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Struktural III-B (Perempuan)', label: 'Struktural III-B (Perempuan)', type: 'number', value: 0 },
+          { name: 'Struktural IV-A (Laki-laki)', label: 'Struktural IV-A (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Struktural IV-A (Perempuan)', label: 'Struktural IV-A (Perempuan)', type: 'number', value: 0 },
+          { name: 'Struktural IV-B (Laki-laki)', label: 'Struktural IV-B (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Struktural IV-B (Perempuan)', label: 'Struktural IV-B (Perempuan)', type: 'number', value: 0 },
+          { name: 'Fungsional Khusus (Laki-laki)', label: 'Fungsional Khusus (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Fungsional Khusus (Perempuan)', label: 'Fungsional Khusus (Perempuan)', type: 'number', value: 0 },
+          { name: 'Calon Fungsional Khusus (Laki-laki)', label: 'Calon Fungsional Khusus (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Calon Fungsional Khusus (Perempuan)', label: 'Calon Fungsional Khusus (Perempuan)', type: 'number', value: 0 },
+          { name: 'Fungsional Umum (Laki-laki)', label: 'Fungsional Umum (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Fungsional Umum (Perempuan)', label: 'Fungsional Umum (Perempuan)', type: 'number', value: 0 },
+          { name: 'Keterangan', label: 'Keterangan', type: 'textarea', placeholder: 'Keterangan tambahan...' }
         ]
       },
       'F02': {
-        name: 'F.02 Sebaran PNS/CPNS Menurut Tingkat Pendidikan dan Jenis Kelamin',
-        filename: 'F.02 Template - Sebaran PNS_CPNS Menurut Tingkat Pendidikan dan Jenis Kelamin.xlsx',
-        period: 'Tahunan',
+        code: 'F.02',
+        name: 'Sebaran PNS/CPNS Menurut Tingkat Pendidikan',
+        period: 'yearly',
         fields: [
-          { name: 'satker', label: 'Satuan Kerja', type: 'text', val: 'Balai KSDA Kalimantan Timur', readonly: true, required: true },
-          { name: 'pendidikan', label: 'Tingkat Pendidikan Terakhir', type: 'select', options: ['SD / Sederajat', 'SMP / Sederajat', 'SMA / SMK / Sederajat', 'Diploma I / II', 'Diploma III', 'Sarjana (S1) / Diploma IV', 'Magister (S2)', 'Doktor (S3)'], required: true },
-          { name: 'laki_laki', label: 'Jumlah Laki-laki', type: 'number', min: 0, required: true },
-          { name: 'perempuan', label: 'Jumlah Perempuan', type: 'number', min: 0, required: true },
-          { name: 'tahun', label: 'Tahun Laporan', type: 'number', val: 2026, required: true }
+          { name: 'Tahun', label: 'Tahun', type: 'number', placeholder: '2026', required: true },
+          { name: 'Periode', label: 'Periode', type: 'text', value: 'Tahunan', readonly: true },
+          { name: 'Satuan Kerja', label: 'Satuan Kerja', type: 'text', value: 'Balai KSDA Kalimantan Timur', readonly: true },
+          { name: 'Doktor (S3) (Laki-laki)', label: 'Doktor (S3) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Doktor (S3) (Perempuan)', label: 'Doktor (S3) (Perempuan)', type: 'number', value: 0 },
+          { name: 'Master (S2) (Laki-laki)', label: 'Master (S2) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Master (S2) (Perempuan)', label: 'Master (S2) (Perempuan)', type: 'number', value: 0 },
+          { name: 'Sarjana (S1) (Laki-laki)', label: 'Sarjana (S1) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Sarjana (S1) (Perempuan)', label: 'Sarjana (S1) (Perempuan)', type: 'number', value: 0 },
+          { name: 'Diploma (D3) (Laki-laki)', label: 'Diploma (D3) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Diploma (D3) (Perempuan)', label: 'Diploma (D3) (Perempuan)', type: 'number', value: 0 },
+          { name: 'SLTA/SMA (Laki-laki)', label: 'SLTA/SMA (Laki-laki)', type: 'number', value: 0 },
+          { name: 'SLTA/SMA (Perempuan)', label: 'SLTA/SMA (Perempuan)', type: 'number', value: 0 },
+          { name: 'SLTP/SMP (Laki-laki)', label: 'SLTP/SMP (Laki-laki)', type: 'number', value: 0 },
+          { name: 'SLTP/SMP (Perempuan)', label: 'SLTP/SMP (Perempuan)', type: 'number', value: 0 },
+          { name: 'Sekolah Dasar (SD) (Laki-laki)', label: 'Sekolah Dasar (SD) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Sekolah Dasar (SD) (Perempuan)', label: 'Sekolah Dasar (SD) (Perempuan)', type: 'number', value: 0 },
+          { name: 'Keterangan', label: 'Keterangan', type: 'textarea', placeholder: 'Keterangan tambahan...' }
         ]
       },
       'F03': {
-        name: 'F.03 Sebaran PNS/CPNS Menurut Golongan dan Jenis Kelamin',
-        filename: 'F.03 Template - Sebaran PNS_CPNS Menurut Golongan dan Jenis Kelamin.xlsx',
-        period: 'Tahunan',
+        code: 'F.03',
+        name: 'Sebaran PNS/CPNS Menurut Golongan',
+        period: 'yearly',
         fields: [
-          { name: 'satker', label: 'Satuan Kerja', type: 'text', val: 'Balai KSDA Kalimantan Timur', readonly: true, required: true },
-          { name: 'golongan', label: 'Golongan / Ruang', type: 'select', options: ['Golongan I (Juru)', 'Golongan II (Pengatur)', 'Golongan III (Penata)', 'Golongan IV (Pembina)'], required: true },
-          { name: 'laki_laki', label: 'Jumlah Laki-laki', type: 'number', min: 0, required: true },
-          { name: 'perempuan', label: 'Jumlah Perempuan', type: 'number', min: 0, required: true },
-          { name: 'tahun', label: 'Tahun Laporan', type: 'number', val: 2026, required: true }
+          { name: 'Tahun', label: 'Tahun', type: 'number', placeholder: '2026', required: true },
+          { name: 'Periode', label: 'Periode', type: 'text', value: 'Tahunan', readonly: true },
+          { name: 'Satuan Kerja', label: 'Satuan Kerja', type: 'text', value: 'Balai KSDA Kalimantan Timur', readonly: true },
+          { name: 'Golongan IV (Laki-laki)', label: 'Golongan IV (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Golongan IV (Perempuan)', label: 'Golongan IV (Perempuan)', type: 'number', value: 0 },
+          { name: 'Golongan III (Laki-laki)', label: 'Golongan III (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Golongan III (Perempuan)', label: 'Golongan III (Perempuan)', type: 'number', value: 0 },
+          { name: 'Golongan II (Laki-laki)', label: 'Golongan II (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Golongan II (Perempuan)', label: 'Golongan II (Perempuan)', type: 'number', value: 0 },
+          { name: 'Golongan I (Laki-laki)', label: 'Golongan I (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Golongan I (Perempuan)', label: 'Golongan I (Perempuan)', type: 'number', value: 0 },
+          { name: 'Keterangan', label: 'Keterangan', type: 'textarea', placeholder: 'Keterangan tambahan...' }
         ]
       },
       'F04': {
-        name: 'F.04 Sebaran Pejabat Fungsional Tertentu Menurut Fungsi dan Jenis Kelamin',
-        filename: 'F.04 Template - Sebaran Pejabat Fungsional Tertentu Menurut Fungsi dan Jenis Kelamin.xlsx',
-        period: 'Tahunan',
+        code: 'F.04',
+        name: 'Pejabat Fungsional Tertentu Menurut Fungsi',
+        period: 'yearly',
         fields: [
-          { name: 'satker', label: 'Satuan Kerja', type: 'text', val: 'Balai KSDA Kalimantan Timur', readonly: true, required: true },
-          { name: 'fungsi', label: 'Fungsi Jabatan Tertentu', type: 'select', options: ['Polisi Kehutanan (Polhut)', 'Pengendali Ekosistem Hutan (PEH)', 'Penyuluh Kehutanan', 'Arsiparis', 'Pranata Komputer', 'Lainnya'], required: true },
-          { name: 'laki_laki', label: 'Jumlah Laki-laki', type: 'number', min: 0, required: true },
-          { name: 'perempuan', label: 'Jumlah Perempuan', type: 'number', min: 0, required: true },
-          { name: 'tahun', label: 'Tahun Laporan', type: 'number', val: 2026, required: true }
+          { name: 'Tahun', label: 'Tahun', type: 'number', placeholder: '2026', required: true },
+          { name: 'Satuan Kerja', label: 'Satuan Kerja', type: 'text', value: 'Balai KSDA Kalimantan Timur', readonly: true },
+          { name: 'Jabatan Fungsional', label: 'Jabatan Fungsional', type: 'select', options: [
+            'Analis Hukum', 'Analis Kebijakan', 'Analis Kepegawaian', 'Analis Pengelolaan Keuangan APBN', 
+            'Analis SDM Aparatur', 'Arsiparis', 'Manggala Agni', 'Medik Veteriner', 'Pengadaan Barang dan Jasa', 
+            'Pengendali Ekosistem Hutan', 'Penggerak Swadaya Masyarakat', 'Penyuluh Kehutanan', 
+            'Penyuluh Lingkungan Hidup', 'Perancang Peraturan Perundang-undangan', 'Perencana', 
+            'Polisi Kehutanan', 'Pranata Humas', 'Pranata Keuangan APBN', 'Pranata Komputer', 'Pranata SDM Aparatur'
+          ]},
+          { name: 'Laki-laki', label: 'Laki-laki', type: 'number', value: 0 },
+          { name: 'Perempuan', label: 'Perempuan', type: 'number', value: 0 },
+          { name: 'Keterangan', label: 'Keterangan', type: 'textarea', placeholder: 'Keterangan tambahan...' }
         ]
       },
       'F05': {
-        name: 'F.05 Sebaran Pejabat Fungsional Tertentu Menurut Fungsi, Tingkat Pendidikan dan Jenis Kelamin',
-        filename: 'F.05 Template - Sebaran Pejabat Fungsional Tertentu Menurut Fungsi, Tingkat Pendidikan dan Jenis Kelamin.xlsx',
-        period: 'Tahunan',
+        code: 'F.05',
+        name: 'Fungsional Menurut Fungsi & Pendidikan',
+        period: 'yearly',
         fields: [
-          { name: 'satker', label: 'Satuan Kerja', type: 'text', val: 'Balai KSDA Kalimantan Timur', readonly: true, required: true },
-          { name: 'fungsi', label: 'Fungsi Jabatan', type: 'select', options: ['Polisi Kehutanan (Polhut)', 'Pengendali Ekosistem Hutan (PEH)', 'Penyuluh Kehutanan', 'Lainnya'], required: true },
-          { name: 'pendidikan', label: 'Tingkat Pendidikan', type: 'select', options: ['SMA / Sederajat', 'Diploma III', 'Sarjana (S1)', 'Magister (S2)', 'Doktor (S3)'], required: true },
-          { name: 'laki_laki', label: 'Jumlah Laki-laki', type: 'number', min: 0, required: true },
-          { name: 'perempuan', label: 'Jumlah Perempuan', type: 'number', min: 0, required: true },
-          { name: 'tahun', label: 'Tahun Laporan', type: 'number', val: 2026, required: true }
+          { name: 'Tahun', label: 'Tahun', type: 'number', placeholder: '2026', required: true },
+          { name: 'Periode', label: 'Periode', type: 'text', value: 'Tahunan', readonly: true },
+          { name: 'Satuan Kerja', label: 'Satuan Kerja', type: 'text', value: 'Balai KSDA Kalimantan Timur', readonly: true },
+          { name: 'Jenis Jabatan Fungsional Tertentu', label: 'Jenis Jabatan Fungsional', type: 'select', options: [
+            'PEH', 'Polhut', 'Penyuluh', 'Pranata Komputer', 'Statistisi', 'Analis Kepegawaian', 'Arsiparis', 'Perencana', 'Pengadaan Barang dan Jasa'
+          ]},
+          { name: 'Doktor (S3) (Laki-laki)', label: 'Doktor (S3) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Doktor (S3) (Perempuan)', label: 'Doktor (S3) (Perempuan)', type: 'number', value: 0 },
+          { name: 'Master (S2) (Laki-laki)', label: 'Master (S2) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Master (S2) (Perempuan)', label: 'Master (S2) (Perempuan)', type: 'number', value: 0 },
+          { name: 'Sarjana (S1) (Laki-laki)', label: 'Sarjana (S1) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Sarjana (S1) (Perempuan)', label: 'Sarjana (S1) (Perempuan)', type: 'number', value: 0 },
+          { name: 'Diploma (D3) (Laki-laki)', label: 'Diploma (D3) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Diploma (D3) (Perempuan)', label: 'Diploma (D3) (Perempuan)', type: 'number', value: 0 },
+          { name: 'SLTA/SMA (Laki-laki)', label: 'SLTA/SMA (Laki-laki)', type: 'number', value: 0 },
+          { name: 'SLTA/SMA (Perempuan)', label: 'SLTA/SMA (Perempuan)', type: 'number', value: 0 },
+          { name: 'SLTP/SMP (Laki-laki)', label: 'SLTP/SMP (Laki-laki)', type: 'number', value: 0 },
+          { name: 'SLTP/SMP (Perempuan)', label: 'SLTP/SMP (Perempuan)', type: 'number', value: 0 },
+          { name: 'Sekolah Dasar (SD) (Laki-laki)', label: 'Sekolah Dasar (SD) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Sekolah Dasar (SD) (Perempuan)', label: 'Sekolah Dasar (SD) (Perempuan)', type: 'number', value: 0 },
+          { name: 'Keterangan', label: 'Keterangan', type: 'textarea', placeholder: 'Keterangan tambahan...' }
         ]
       },
       'F06': {
-        name: 'F.06 Sebaran ASN P3K menurut Tingkat Pendidikan dan Jenis Kelamin',
-        filename: 'F.06 Template - Sebaran ASN P3K menurut Tingkat Pendidikan dan Jenis Kelamin.xlsx',
-        period: 'Tahunan',
+        code: 'F.06',
+        name: 'Sebaran ASN P3K Menurut Pendidikan',
+        period: 'yearly',
         fields: [
-          { name: 'satker', label: 'Satuan Kerja', type: 'text', val: 'Balai KSDA Kalimantan Timur', readonly: true, required: true },
-          { name: 'pendidikan', label: 'Tingkat Pendidikan', type: 'select', options: ['SMA / SMK / Sederajat', 'Diploma III', 'Sarjana (S1)', 'Magister (S2)'], required: true },
-          { name: 'laki_laki', label: 'Jumlah Laki-laki', type: 'number', min: 0, required: true },
-          { name: 'perempuan', label: 'Jumlah Perempuan', type: 'number', min: 0, required: true },
-          { name: 'tahun', label: 'Tahun Laporan', type: 'number', val: 2026, required: true }
+          { name: 'Tahun', label: 'Tahun', type: 'number', placeholder: '2026', required: true },
+          { name: 'Periode', label: 'Periode', type: 'text', value: 'Tahunan', readonly: true },
+          { name: 'Satuan Kerja', label: 'Satuan Kerja', type: 'text', value: 'Balai KSDA Kalimantan Timur', readonly: true },
+          { name: 'Master (S2) (Laki-laki)', label: 'Master (S2) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Master (S2) (Perempuan)', label: 'Master (S2) (Perempuan)', type: 'number', value: 0 },
+          { name: 'Sarjana (S1) (Laki-laki)', label: 'Sarjana (S1) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Sarjana (S1) (Perempuan)', label: 'Sarjana (S1) (Perempuan)', type: 'number', value: 0 },
+          { name: 'Diploma (D3) (Laki-laki)', label: 'Diploma (D3) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Diploma (D3) (Perempuan)', label: 'Diploma (D3) (Perempuan)', type: 'number', value: 0 },
+          { name: 'SLTA/SMA (Laki-laki)', label: 'SLTA/SMA (Laki-laki)', type: 'number', value: 0 },
+          { name: 'SLTA/SMA (Perempuan)', label: 'SLTA/SMA (Perempuan)', type: 'number', value: 0 },
+          { name: 'SLTP/SMP (Laki-laki)', label: 'SLTP/SMP (Laki-laki)', type: 'number', value: 0 },
+          { name: 'SLTP/SMP (Perempuan)', label: 'SLTP/SMP (Perempuan)', type: 'number', value: 0 },
+          { name: 'Sekolah Dasar (SD) (Laki-laki)', label: 'Sekolah Dasar (SD) (Laki-laki)', type: 'number', value: 0 },
+          { name: 'Sekolah Dasar (SD) (Perempuan)', label: 'Sekolah Dasar (SD) (Perempuan)', type: 'number', value: 0 },
+          { name: 'Keterangan', label: 'Keterangan', type: 'textarea', placeholder: 'Keterangan tambahan...' }
         ]
       },
       'F07': {
-        name: 'F.07 Kerja Sama Teknik Bidang KSDAE',
-        filename: 'F.07 Template - Kerja Sama Teknik Bidang KSDAE.xlsx',
-        period: 'Tahunan',
+        code: 'F.07',
+        name: 'Kerja Sama Teknik Bidang KSDAE',
+        period: 'yearly',
         fields: [
-          { name: 'satker', label: 'Satuan Kerja', type: 'text', val: 'Balai KSDA Kalimantan Timur', readonly: true, required: true },
-          { name: 'nama_kerjasama', label: 'Nama Program Kerja Sama', type: 'text', placeholder: 'cth: Konservasi Habitat Penyu Berbasis Komunitas', required: true },
-          { name: 'mitra', label: 'Nama Mitra / Partner Kerja Sama', type: 'text', placeholder: 'cth: Yayasan Konservasi Alam Nusantara (YKAN)', required: true },
-          { name: 'ruang_lingkup', label: 'Ruang Lingkup Kegiatan', type: 'text', placeholder: 'cth: Rehabilitasi kawasan, Edukasi publik', required: true },
-          { name: 'nilai', label: 'Nilai Kerja Sama (Rupiah)', type: 'number', min: 0, placeholder: 'cth: 250000000', required: true },
-          { name: 'masa_berlaku', label: 'Masa Berlaku (Selesai Kontrak)', type: 'text', placeholder: 'cth: Jan 2026 - Des 2028', required: true },
-          { name: 'tahun', label: 'Tahun Pelaksanaan', type: 'number', val: 2026, required: true }
+          { name: 'Eselon II / UPT Ditjen KSDAE', label: 'Eselon II / UPT KSDAE', type: 'text', value: 'Balai KSDA Kalimantan Timur', readonly: true },
+          { name: 'Mitra Kerja Sama', label: 'Mitra Kerja Sama', type: 'text', placeholder: 'Nama mitra...', required: true },
+          { name: 'Tipe Mitra', label: 'Tipe Mitra', type: 'select', options: [
+            'Badan Usaha Milik Daerah', 'Badan Usaha Milik Negara', 'Badan Usaha Milik Swasta', 
+            'Koperasi', 'Lembaga Nirlaba (Organisasi Masyarakat)', 'Lembaga Nirlaba (Pendidikan dan Pelatihan)', 
+            'Lembaga Nirlaba (Penelitian/Pengkajian)', 'Pemerintah Daerah Kab/Kota', 'Pemerintah Daerah Provinsi', 
+            'Pemerintah Pusat (Kementerian)', 'Pemerintah Pusat (Lembaga Pemerintah Non-Kementerian)', 
+            'Pemerintah Pusat (Sekretariat Lembaga Negara)', 'Pemerintah Pusat (Sekretariat Lembaga Non-Struktural)'
+          ]},
+          { name: 'Jenis Dokumen', label: 'Jenis Dokumen', type: 'select', options: ['PKS', 'MOU', 'Potensi'] },
+          { name: 'Status Kerja Sama', label: 'Status Kerja Sama', type: 'select', options: ['Aktif', 'Berakhir', 'Proses Perpanjangan', 'Potensi', 'Masa Perpanjangan'] },
+          { name: 'Nomor MOU/PKS', label: 'Nomor Perjanjian (MOU/PKS)', type: 'text', placeholder: 'PKS.12/KSDAE/...' },
+          { name: 'Tanggal Awal Kerja Sama', label: 'Tanggal Mulai', type: 'date' },
+          { name: 'Tanggal Berakhir Kerja Sama', label: 'Tanggal Berakhir', type: 'date' },
+          { name: 'Judul Kerja Sama', label: 'Judul Kerja Sama', type: 'text', placeholder: 'Judul kemitraan...' },
+          { name: 'Ruang Lingkup', label: 'Ruang Lingkup Kegiatan', type: 'textarea', placeholder: 'Penjajakan lingkup...' },
+          { name: 'Provinsi', label: 'Provinsi Kerja Sama', type: 'select', options: [
+            'Kalimantan Timur', 'Kalimantan Barat', 'Kalimantan Tengah', 'Kalimantan Selatan', 'Kalimantan Utara', 'Lain-lain'
+          ]},
+          { name: 'Lokasi Kerja Sama', label: 'Lokasi Detail', type: 'text', placeholder: 'Nama kawasan...' },
+          { name: 'Luas Area Kerja Sama (Ha)', label: 'Luas Area (Ha)', type: 'number', value: 0 },
+          { name: 'Dukungan terhadap Kinerja KLHK (IKU, IKP, IKK)', label: 'Dukungan Kinerja KLHK', type: 'text' },
+          { name: 'Komitmen Pendanaan (Rp)', label: 'Komitmen Pendanaan (Rp)', type: 'number', value: 0 },
+          { name: 'Output', label: 'Output Kegiatan', type: 'textarea' },
+          { name: 'Outcome', label: 'Outcome Kegiatan', type: 'textarea' },
+          { name: 'Relevansi', label: 'Relevansi', type: 'text' },
+          { name: 'Efisiensi', label: 'Efisiensi', type: 'text' },
+          { name: 'Efektivitas', label: 'Efektivitas', type: 'text' },
+          { name: 'Keberlanjutan', label: 'Keberlanjutan', type: 'text' },
+          { name: 'Progress kegiatan', label: 'Progress Fisik', type: 'textarea' },
+          { name: 'Permasalahan dan tindak lanjut', label: 'Kendala & Rencana Solusi', type: 'textarea' },
+          { name: 'Dampak terhadap ekonomi', label: 'Dampak Ekonomi', type: 'text' },
+          { name: 'Dampak terhadap sosial', label: 'Dampak Sosial', type: 'text' },
+          { name: 'Dampak terhadap lingkungan', label: 'Dampak Lingkungan', type: 'text' },
+          { name: 'Estimasi total nilai manfaat kerja sama (Rp)', label: 'Estimasi Manfaat Nilai (Rp)', type: 'number', value: 0 },
+          { name: 'Keterangan', label: 'Catatan Keterangan', type: 'textarea' }
         ]
       },
       'F08': {
-        name: 'F.08 Perijinan Masuk Kawasan Konservasi',
-        filename: 'F.08 Template - Perijinan Masuk Kawasan Konservasi.xlsx',
-        period: 'Bulanan',
+        code: 'F.08',
+        name: 'Perijinan Masuk Kawasan Konservasi',
+        period: 'monthly',
         fields: [
-          { name: 'satker', label: 'Satuan Kerja', type: 'text', val: 'Balai KSDA Kalimantan Timur', readonly: true, required: true },
-          { 
-            name: 'kawasan', 
-            label: 'Nama Kawasan Konservasi', 
-            type: 'select', 
-            options: [
-              '100214160 - CA Muara Kaman Sedulang',
-              '100214161 - CA Padang Luwai',
-              '100224092 - SM Kelian',
-              '100254146 - TWA Padang Luwai'
-            ], 
-            required: true 
-          },
-          { name: 'pemohon', label: 'Nama Pemohon / Instansi', type: 'text', placeholder: 'cth: Universitas Indonesia', required: true },
-          { name: 'keperluan', label: 'Keperluan Masuk Kawasan', type: 'select', options: ['Penelitian / Riset ilmiah', 'Pendidikan / Kuliah Lapangan', 'Pembuatan Film / Dokumentasi Komersil', 'Wisata Khusus / Ekspedisi', 'Lainnya'], required: true },
-          { name: 'jumlah_anggota', label: 'Jumlah Orang', type: 'number', min: 1, required: true },
-          { name: 'pnbp', label: 'Nilai PNBP (Rupiah)', type: 'number', min: 0, placeholder: 'cth: 150000', required: true },
-          { name: 'bulan', label: 'Bulan Laporan', type: 'select', options: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'], required: true },
-          { name: 'tahun', label: 'Tahun Laporan', type: 'number', val: 2026, required: true }
+          { name: 'Tahun', label: 'Tahun', type: 'number', placeholder: '2026', required: true },
+          { name: 'Periode', label: 'Periode', type: 'text', value: 'Bulanan', readonly: true },
+          { name: 'Satuan Kerja', label: 'Satuan Kerja', type: 'text', value: 'Balai KSDA Kalimantan Timur', readonly: true },
+          { name: 'Bulan', label: 'Bulan Laporan', type: 'select', options: [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+          ]},
+          { name: 'Kawasan Konservasi', label: 'Kawasan Konservasi (SIMAK)', type: 'select', options: [
+            '100214160 - CA Muara Kaman Sedulang',
+            '100214161 - CA Padang Luwai',
+            '100224092 - SM Kelian',
+            '100254146 - TWA Padang Luwai'
+          ]},
+          { name: 'Penelitian dan Pengembangan (DN)', label: 'Litbang - Dalam Negeri (Orang)', type: 'number', value: 0 },
+          { name: 'Penelitian dan Pengembangan (LN)', label: 'Litbang - Luar Negeri (Orang)', type: 'number', value: 0 },
+          { name: 'Pendidikan dan Ilmu Pengetahuan (DN)', label: 'Pendidikan - Dalam Negeri (Orang)', type: 'number', value: 0 },
+          { name: 'Pendidikan dan Ilmu Pengetahuan (LN)', label: 'Pendidikan - Luar Negeri (Orang)', type: 'number', value: 0 },
+          { name: 'Pengambilan Foto dan Video (DN)', label: 'Dokumentasi/Kamera - Dalam Negeri (Orang)', type: 'number', value: 0 },
+          { name: 'Pengambilan Foto dan Video (LN)', label: 'Dokumentasi/Kamera - Luar Negeri (Orang)', type: 'number', value: 0 },
+          { name: 'Lain-lain (DN)', label: 'Keperluan Lain - Dalam Negeri (Orang)', type: 'number', value: 0 },
+          { name: 'Lain-lain (LN)', label: 'Keperluan Lain - Luar Negeri (Orang)', type: 'number', value: 0 },
+          { name: 'Keterangan', label: 'Keterangan Tambahan', type: 'textarea' }
         ]
       }
     };
 
-    // ON WINDOW LOAD
-    document.addEventListener('DOMContentLoaded', () => {
-      initTheme();
-      initConfirmModal();
-      checkGasUrlConfiguration();
-      switchModule('F08'); // load default module
-    });
+    let activeModuleKey = 'F01';
+    let currentFilter = 'all';
+    let databaseRecords = [];
+    let editModeId = null; 
+    let deleteTargetId = null;
 
-    // Melakukan pengecekan apakah user masih menggunakan URL placeholder bawaan template
-    function checkGasUrlConfiguration() {
-      const banner = document.getElementById('setupAssistantBanner');
-      // Mendeteksi jika URL masih bawaan template awal
-      if (GAS_URL.includes('AKfycby3jC5v1t9g3wN0fE_eRCH9SgqO6k-U70gqf7tTzqf-wYqD_5fF8D8F') || GAS_URL.trim() === '' || GAS_URL.includes('URL_AKSES_DI_SINI')) {
-        banner.classList.remove('hidden');
+    // =================================================================================
+    // INITIALIZATION & RENDER HANDLERS
+    // =================================================================================
+    window.onload = function() {
+      // Setup Theme
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        updateThemeUI(true);
       } else {
-        banner.classList.add('hidden');
-      }
-    }
-
-    // Theme Management (Light / Dark Mode)
-    function initTheme() {
-      const themeToggleBtn = document.getElementById('themeToggle');
-      const themeIcon = document.getElementById('themeIcon');
-      
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeIcon.className = 'fa-solid fa-sun';
-      } else {
-        themeIcon.className = 'fa-solid fa-moon';
-      }
-
-      themeToggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-        showToast(`Beralih ke mode ${isDark ? 'Gelap' : 'Terang'}`, 'info');
-      });
-    }
-
-    // Custom Confirmation Modal Initializer
-    function initConfirmModal() {
-      const modal = document.getElementById('customConfirmModal');
-      const cancelBtn = document.getElementById('cancelConfirmBtn');
-      const okBtn = document.getElementById('okConfirmBtn');
-
-      cancelBtn.addEventListener('click', () => {
-        modal.classList.add('hidden');
-        targetDeleteId = null;
-      });
-
-      okBtn.addEventListener('click', async () => {
-        modal.classList.add('hidden');
-        if (targetDeleteId) {
-          await executeDeleteRow(targetDeleteId);
-        }
-      });
-    }
-
-    // FILTER PERIOD CONTROLLER
-    function setPeriodFilter(period) {
-      activePeriodFilter = period;
-      
-      const btnSemua = document.getElementById('btn-period-semua');
-      const btnBulan = document.getElementById('btn-period-bulan');
-      const btnTahun = document.getElementById('btn-period-tahun');
-      
-      [btnSemua, btnBulan, btnTahun].forEach(btn => {
-        btn.className = "py-1.5 rounded-md font-bold transition-all text-center cursor-pointer text-slate-400 hover:text-slate-300 dark:hover:text-slate-100";
-      });
-      
-      const sectionMonthly = document.getElementById('section-monthly');
-      const sectionYearly = document.getElementById('section-yearly');
-      
-      if (period === 'Semua') {
-        btnSemua.className = "py-1.5 rounded-md font-bold transition-all text-center cursor-pointer bg-sky-500 text-white shadow-sm";
-        sectionMonthly.classList.remove('hidden');
-        sectionYearly.classList.remove('hidden');
-      } else if (period === 'Bulanan') {
-        btnBulan.className = "py-1.5 rounded-md font-bold transition-all text-center cursor-pointer bg-emerald-500 text-white shadow-sm";
-        sectionMonthly.classList.remove('hidden');
-        sectionYearly.classList.add('hidden');
-      } else if (period === 'Tahunan') {
-        btnTahun.className = "py-1.5 rounded-md font-bold transition-all text-center cursor-pointer bg-sky-500 text-white shadow-sm";
-        sectionMonthly.classList.add('hidden');
-        sectionYearly.classList.remove('hidden');
+        document.documentElement.classList.remove('dark');
+        updateThemeUI(false);
       }
       
-      showToast(`Menyaring modul: Periode ${period}`, 'info');
-    }
-
-    // SWITCH MODULE FORMULIR
-    function switchModule(moduleKey) {
-      // Selalu batalkan edit mode jika pindah modul
-      cancelEditMode();
-
-      currentModule = moduleKey;
-      const config = MODULES_CONFIG[moduleKey];
-      if (!config) return;
-
-      const allButtons = document.querySelectorAll('#modulesList button');
-      allButtons.forEach(btn => btn.classList.remove('active-tab'));
-      
-      const activeBtn = document.getElementById(`btn-${moduleKey}`);
-      if (activeBtn) activeBtn.classList.add('active-tab');
-
-      // Update Title & Badge
-      const formTitle = document.getElementById('formTitle');
-      const formPeriodBadge = document.getElementById('formPeriodBadge');
-      
-      formTitle.textContent = config.name;
-      formPeriodBadge.textContent = `${moduleKey} - ${config.period.toUpperCase()}`;
-      
-      // Update Database Table Title
-      const tableTitle = document.getElementById('tableTitle');
-      tableTitle.innerHTML = `<i class="fa-solid fa-database text-sky-500"></i> Database: ${config.name}`;
-      
-      if (config.period === 'Bulanan') {
-        formPeriodBadge.className = "absolute top-0 right-0 px-4 py-1.5 text-[10px] font-bold tracking-wider rounded-bl-xl rounded-tr-none text-white uppercase bg-emerald-500 shadow-sm z-10 transition-all duration-300";
-      } else {
-        formPeriodBadge.className = "absolute top-0 right-0 px-4 py-1.5 text-[10px] font-bold tracking-wider rounded-bl-xl rounded-tr-none text-white uppercase bg-sky-500 shadow-sm z-10 transition-all duration-300";
+      // Auto checking ID warning
+      if (GAS_URL.includes('AKfycbwL5mPkPXUnsKPQ-_OasSdlMP-0CqyPQkQ5c3jHMfbCghFowB5vrRAf1wOzUNmB4hdV1Q') || GAS_URL.includes('GANTI')) {
+        document.getElementById('setupWarningBanner').classList.remove('hidden');
       }
 
-      generateFormFields(config.fields);
-      loadDataFromDatabase(moduleKey);
-    }
+      renderSidebar();
+      switchModule('F01');
+    };
 
-    // FIELD GENERATOR FUNCTION
-    function generateFormFields(fields) {
-      const container = document.getElementById('dynamicFieldsContainer');
+    function renderSidebar() {
+      const container = document.getElementById('moduleMenuList');
       container.innerHTML = '';
 
-      fields.forEach(f => {
-        const formGroup = document.createElement('div');
-        formGroup.className = 'flex flex-col gap-1.5';
+      Object.keys(MODULES).forEach(key => {
+        const mod = MODULES[key];
+        
+        // Filter logic
+        if (currentFilter === 'monthly' && mod.period !== 'monthly') return;
+        if (currentFilter === 'yearly' && mod.period !== 'yearly') return;
 
-        const label = document.createElement('label');
-        label.className = 'text-xs font-semibold text-slate-400 uppercase tracking-wider';
-        label.innerHTML = `${f.label} ${f.required ? '<span class="text-rose-500">*</span>' : ''}`;
-        formGroup.appendChild(label);
+        const isSelected = key === activeModuleKey;
+        const activeClass = isSelected 
+          ? 'bg-sky-500 text-white shadow-md' 
+          : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800';
 
-        if (f.type === 'select') {
-          const select = document.createElement('select');
-          select.name = f.name;
-          select.id = `input-${f.name}`;
-          select.className = 'form-input-custom w-full px-4 py-2.5 text-sm bg-slate-500/5 focus:bg-transparent';
-          select.required = f.required || false;
-          
-          const defOpt = document.createElement('option');
-          defOpt.value = '';
-          defOpt.textContent = `-- Pilih ${f.label} --`;
-          select.appendChild(defOpt);
+        const badgeBg = mod.period === 'monthly' 
+          ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-400' 
+          : 'bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-400';
 
-          f.options.forEach(opt => {
-            const o = document.createElement('option');
-            o.value = opt;
-            o.textContent = opt;
-            select.appendChild(o);
-          });
-          formGroup.appendChild(select);
-        } else {
-          const input = document.createElement('input');
-          input.name = f.name;
-          input.id = `input-${f.name}`;
-          input.type = f.type;
-          if (f.placeholder) input.placeholder = f.placeholder;
-          if (f.val !== undefined) input.value = f.val;
-          if (f.min !== undefined) input.min = f.min;
-          if (f.readonly) {
-            input.readOnly = true;
-          }
-          input.required = f.required || false;
-          input.className = 'form-input-custom w-full px-4 py-2.5 text-sm';
-          formGroup.appendChild(input);
-        }
-
-        container.appendChild(formGroup);
+        container.innerHTML += `
+          <button onclick="switchModule('${key}')" class="w-full text-left p-3.5 rounded-xl transition-all duration-200 flex items-center justify-between text-xs font-semibold ${activeClass}">
+            <div class="flex items-center gap-2">
+              <span class="text-sm"><i class="fa-solid ${mod.period === 'monthly' ? 'fa-calendar-days' : 'fa-calendar'}"></i></span>
+              <div class="truncate max-w-[180px]">
+                <p class="font-bold">${mod.code}</p>
+                <p class="text-[10px] opacity-90 truncate font-normal">${mod.name}</p>
+              </div>
+            </div>
+            <span class="text-[9px] px-2 py-0.5 rounded-full font-bold uppercase ${badgeBg}">${mod.period === 'monthly' ? 'Bulan' : 'Tahun'}</span>
+          </button>
+        `;
       });
     }
 
-    // FETCH DATA FROM DATABASE (READ)
-    async function loadDataFromDatabase(moduleKey) {
-      const statusEl = document.getElementById('connectionStatus');
-      const tableHeaderRow = document.getElementById('tableHeaderRow');
-      const tableBody = document.getElementById('tableBody');
-      const emptyState = document.getElementById('tableEmptyState');
-      const loadingState = document.getElementById('tableLoadingState');
+    function switchModule(key) {
+      activeModuleKey = key;
+      editModeId = null;
+      renderSidebar();
+      renderForm();
+      fetchDatabaseData();
+    }
 
-      statusEl.innerHTML = '<span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block animate-pulse"></span><span>Menghubungkan Database...</span>';
-      tableBody.innerHTML = '';
-      emptyState.classList.add('hidden');
-      loadingState.classList.remove('hidden');
+    function setPeriodFilter(filter) {
+      currentFilter = filter;
+      ['all', 'monthly', 'yearly'].forEach(f => {
+        const btn = document.getElementById(`filter-${f}`);
+        if (f === filter) {
+          btn.className = "text-xs font-semibold py-1.5 px-3 rounded-lg transition-all bg-sky-500 text-white";
+        } else {
+          btn.className = "text-xs font-semibold py-1.5 px-3 rounded-lg transition-all text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800";
+        }
+      });
+      renderSidebar();
+    }
 
-      const config = MODULES_CONFIG[moduleKey];
-      tableHeaderRow.innerHTML = '';
+    // =================================================================================
+    // FORM GENERATION
+    // =================================================================================
+    function renderForm() {
+      const mod = MODULES[activeModuleKey];
+      const formEl = document.getElementById('moduleEntryForm');
+      document.getElementById('formModuleTitle').innerText = `${mod.code} - ${mod.name}`;
       
-      const headerKeys = ['No', 'Satuan Kerja'];
-      config.fields.forEach(f => {
-        if (f.name !== 'satker') headerKeys.push(f.label);
-      });
-      headerKeys.push('Tanggal Entri');
-      headerKeys.push('Aksi');
+      const badge = document.getElementById('formPeriodBadge');
+      if (mod.period === 'monthly') {
+        badge.innerText = 'Bulanan';
+        badge.className = 'absolute top-4 right-4 text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full tracking-wider shadow-sm z-10 bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-400';
+      } else {
+        badge.innerText = 'Tahunan';
+        badge.className = 'absolute top-4 right-4 text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full tracking-wider shadow-sm z-10 bg-blue-100 text-blue-800 dark:bg-blue-950/80 dark:text-blue-400';
+      }
 
-      headerKeys.forEach(hk => {
-        const th = document.createElement('th');
-        th.className = 'px-6 py-3 text-left';
-        th.textContent = hk;
-        tableHeaderRow.appendChild(th);
+      formEl.innerHTML = '';
+
+      mod.fields.forEach(field => {
+        let inputHtml = '';
+        const requiredAttr = field.required ? 'required' : '';
+        const readonlyAttr = field.readonly ? 'readonly' : '';
+        const defaultValue = field.value !== undefined ? field.value : '';
+
+        const wrapperClass = field.type === 'textarea' ? 'md:col-span-2' : '';
+
+        if (field.type === 'select') {
+          let optionsHtml = '';
+          field.options.forEach(opt => {
+            optionsHtml += `<option value="${opt}">${opt}</option>`;
+          });
+          inputHtml = `
+            <select name="${field.name}" ${requiredAttr} class="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 focus:outline-none dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+              ${optionsHtml}
+            </select>
+          `;
+        } else if (field.type === 'textarea') {
+          inputHtml = `
+            <textarea name="${field.name}" placeholder="${field.placeholder || ''}" ${requiredAttr} class="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg p-2.5 text-xs h-20 focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 focus:outline-none dark:bg-slate-800 dark:border-slate-700 dark:text-white">${defaultValue}</textarea>
+          `;
+        } else {
+          const stepAttr = field.type === 'number' ? 'step="any"' : '';
+          inputHtml = `
+            <input type="${field.type}" name="${field.name}" value="${defaultValue}" placeholder="${field.placeholder || ''}" ${requiredAttr} ${readonlyAttr} ${stepAttr} class="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 focus:outline-none disabled:opacity-60 dark:bg-slate-800 dark:border-slate-700 dark:text-white ${field.readonly ? 'cursor-not-allowed bg-slate-100 dark:bg-slate-800/40' : ''}">
+          `;
+        }
+
+        formEl.innerHTML += `
+          <div class="${wrapperClass} flex flex-col gap-1">
+            <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wide dark:text-slate-400">${field.label}</label>
+            ${inputHtml}
+          </div>
+        `;
       });
+
+      // Submit buttons and edit cancel
+      formEl.innerHTML += `
+        <div class="md:col-span-2 flex items-center justify-end gap-2.5 border-t border-slate-100 pt-4 mt-2 dark:border-slate-800">
+          ${editModeId ? `
+            <button type="button" onclick="cancelEdit()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-2 px-4 rounded-xl transition dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
+              Batal Edit
+            </button>
+          ` : ''}
+          <button type="submit" class="text-xs bg-sky-500 hover:bg-sky-600 text-white font-bold py-2.5 px-6 rounded-xl shadow-sm transition flex items-center gap-1.5">
+            <i class="fa-solid ${editModeId ? 'fa-save' : 'fa-paper-plane'}"></i>
+            ${editModeId ? 'Simpan Perubahan' : 'Kirim Laporan'}
+          </button>
+        </div>
+      `;
+    }
+
+    // =================================================================================
+    // API ACTIONS: CREATE, READ, UPDATE, DELETE
+    // =================================================================================
+    async function fetchDatabaseData() {
+      const spinner = document.getElementById('refreshBtnIcon');
+      spinner.classList.add('fa-spin');
+      
+      const dbTitle = document.getElementById('databaseTableTitle');
+      const mod = MODULES[activeModuleKey];
+      dbTitle.innerText = `Database: ${mod.code}_${mod.name.replace(/[^A-Za-z0-9]/g, '')}`;
 
       try {
-        const response = await fetch(`${GAS_URL}?action=getAll&module=${moduleKey}`);
+        const response = await fetch(`${GAS_URL}?action=getAll&module=${activeModuleKey}`);
         const result = await response.json();
-
-        loadingState.classList.add('hidden');
-
+        
         if (result.success) {
-          dbData = result.data;
-          statusEl.innerHTML = '<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span><span class="text-emerald-500">Koneksi Stabil</span>';
-          renderTableRows(dbData);
+          databaseRecords = result.data || [];
+          renderDatabaseTable();
         } else {
-          statusEl.innerHTML = '<span class="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span><span class="text-rose-500">Gagal Memuat Data</span>';
-          emptyState.classList.remove('hidden');
-          showToast(`Error database: ${result.error}`, 'error');
+          showNotification(result.error || 'Terjadi kesalahan sistem.', 'danger');
         }
       } catch (err) {
-        loadingState.classList.add('hidden');
-        statusEl.innerHTML = '<span class="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span><span class="text-rose-500">API Terputus</span>';
-        emptyState.classList.remove('hidden');
-        showToast(`Koneksi Backend Gagal. Mohon periksa kembali Deployment URL GAS Anda.`, 'warning');
+        showNotification(`Terputus dari database cloud: ${err.message}. Pastikan URL Web App Anda aktif dan terkonfigurasi.`, 'danger');
+      } finally {
+        spinner.classList.remove('fa-spin');
       }
     }
 
-    // RENDER ROWS TO HTML TABLE
-    function renderTableRows(data) {
-      const tableBody = document.getElementById('tableBody');
-      const emptyState = document.getElementById('tableEmptyState');
-      tableBody.innerHTML = '';
+    function renderDatabaseTable() {
+      const table = document.getElementById('databaseTable');
+      const placeholder = document.getElementById('noDataPlaceholder');
+      table.innerHTML = '';
 
-      if (!data || data.length === 0) {
-        emptyState.classList.remove('hidden');
+      if (databaseRecords.length === 0) {
+        placeholder.classList.remove('hidden');
         return;
       }
+      placeholder.classList.add('hidden');
 
-      emptyState.classList.add('hidden');
-      const config = MODULES_CONFIG[currentModule];
+      const mod = MODULES[activeModuleKey];
+      
+      // Setup headers
+      let headerHtml = '<thead><tr class="bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">';
+      mod.fields.forEach(f => {
+        headerHtml += `<th class="p-3 font-bold text-slate-500 dark:text-slate-400 truncate max-w-[150px]" title="${f.label}">${f.label}</th>`;
+      });
+      headerHtml += `<th class="p-3 font-bold text-slate-500 dark:text-slate-400 text-right">Aksi</th></tr></thead>`;
+      table.innerHTML += headerHtml;
 
-      data.forEach((row, index) => {
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-500/5 transition-colors duration-150';
-        tr.style.borderColor = 'var(--border)';
-
-        // 1. Column No
-        const tdNo = document.createElement('td');
-        tdNo.className = 'px-6 py-4 font-semibold text-slate-400';
-        tdNo.textContent = index + 1;
-        tr.appendChild(tdNo);
-
-        // 2. Column Satker
-        const tdSatker = document.createElement('td');
-        tdSatker.className = 'px-6 py-4 font-bold';
-        tdSatker.textContent = row.satker || '-';
-        tr.appendChild(tdSatker);
-
-        // 3. Dynamic Columns from schema
-        config.fields.forEach(f => {
-          if (f.name !== 'satker') {
-            const td = document.createElement('td');
-            td.className = 'px-6 py-4';
-            
-            if (f.name === 'nilai' || f.name === 'pnbp') {
-              td.textContent = row[f.name] ? `Rp ${Number(row[f.name]).toLocaleString('id-ID')}` : 'Rp 0';
-            } else {
-              td.textContent = row[f.name] !== undefined ? row[f.name] : '-';
-            }
-            tr.appendChild(td);
-          }
+      // Setup body rows
+      let bodyHtml = '<tbody>';
+      databaseRecords.forEach(row => {
+        bodyHtml += `<tr class="border-b border-slate-100 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/40 transition">`;
+        mod.fields.forEach(f => {
+          const value = row[f.name] !== undefined ? row[f.name] : '';
+          bodyHtml += `<td class="p-3 text-slate-700 dark:text-slate-300 font-medium truncate max-w-[200px]" title="${value}">${value}</td>`;
         });
-
-        // 4. Timestamp Column
-        const tdTime = document.createElement('td');
-        tdTime.className = 'px-6 py-4 text-xs text-slate-400';
-        if (row.timestamp) {
-          const date = new Date(row.timestamp);
-          tdTime.textContent = date.toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit'});
-        } else {
-          tdTime.textContent = '-';
-        }
-        tr.appendChild(tdTime);
-
-        // 5. Actions Column (Edit & Delete side by side with Icons)
-        const tdActions = document.createElement('td');
-        tdActions.className = 'px-6 py-4';
         
-        const actionContainer = document.createElement('div');
-        actionContainer.className = 'flex items-center gap-2';
-
-        // EDIT BUTTON
-        const editBtn = document.createElement('button');
-        editBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
-        editBtn.className = 'w-8 h-8 rounded bg-amber-500/10 text-amber-500 hover:bg-amber-500 hover:text-white transition-all flex items-center justify-center cursor-pointer';
-        editBtn.title = 'Edit Baris Data ini';
-        editBtn.onclick = () => enableEditMode(row);
-        
-        // DELETE BUTTON
-        const deleteBtn = document.createElement('button');
-        deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-        deleteBtn.className = 'w-8 h-8 rounded bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white transition-all flex items-center justify-center cursor-pointer';
-        deleteBtn.title = 'Hapus Baris Data ini';
-        deleteBtn.onclick = () => openConfirmModal(row.id);
-        
-        actionContainer.appendChild(editBtn);
-        actionContainer.appendChild(deleteBtn);
-        tdActions.appendChild(actionContainer);
-        tr.appendChild(tdActions);
-
-        tableBody.appendChild(tr);
+        // Action column using modern beautiful icon triggers
+        bodyHtml += `
+          <td class="p-3 text-right flex items-center justify-end gap-2.5">
+            <button onclick="startEdit('${row.id}')" class="p-1.5 bg-sky-50 text-sky-600 rounded-lg hover:bg-sky-100 transition dark:bg-sky-950/40 dark:text-sky-400" title="Edit Data">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button onclick="triggerDelete('${row.id}')" class="p-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition dark:bg-red-950/40 dark:text-red-400" title="Hapus Data">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>`;
       });
+      bodyHtml += '</tbody>';
+      table.innerHTML += bodyHtml;
     }
 
-    // ACTIVATE EDIT MODE
-    function enableEditMode(row) {
-      editMode = true;
-      editId = row.id;
-
-      // Show indicator
-      const indicator = document.getElementById('editModeIndicator');
-      indicator.classList.remove('hidden');
-
-      // Update button text
-      const btnSubmit = document.getElementById('btnSubmitForm');
-      const submitBtnText = document.getElementById('submitBtnText');
-      submitBtnText.textContent = 'Simpan Perubahan';
-      btnSubmit.className = 'px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-semibold text-sm flex items-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer';
-
-      // Populate input fields
-      const config = MODULES_CONFIG[currentModule];
-      config.fields.forEach(f => {
-        const inputEl = document.getElementById(`input-${f.name}`);
-        if (inputEl) {
-          inputEl.value = row[f.name] !== undefined ? row[f.name] : '';
-        }
-      });
-
-      // Smooth scroll to form section
-      document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
-      showToast('Form terisi otomatis. Silakan lakukan perubahan data.', 'info');
-    }
-
-    // CANCEL EDIT MODE
-    function cancelEditMode() {
-      editMode = false;
-      editId = null;
-
-      // Hide indicator
-      const indicator = document.getElementById('editModeIndicator');
-      if (indicator) indicator.classList.add('hidden');
-
-      // Restore submit button
-      const btnSubmit = document.getElementById('btnSubmitForm');
-      const submitBtnText = document.getElementById('submitBtnText');
-      if (submitBtnText) submitBtnText.textContent = 'Kirim Isian Data';
-      if (btnSubmit) {
-        btnSubmit.className = 'px-5 py-2.5 bg-sky-500 hover:bg-sky-600 text-white rounded-lg font-semibold text-sm flex items-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer';
-      }
-    }
-
-    // FORM SUBMISSION CONTROLLER (CREATE or UPDATE)
     async function handleFormSubmit(event) {
       event.preventDefault();
-      const form = document.getElementById('mainDynamicForm');
-      const btnSubmit = document.getElementById('btnSubmitForm');
-      const originalBtnText = btnSubmit.innerHTML;
-
-      // Extract form data
+      const form = document.getElementById('moduleEntryForm');
       const formData = new FormData(form);
       const payloadData = {};
-      formData.forEach((value, key) => {
-        const fieldConfig = MODULES_CONFIG[currentModule].fields.find(f => f.name === key);
-        if (fieldConfig && fieldConfig.type === 'number') {
-          payloadData[key] = Number(value);
+
+      // Konversi data form
+      MODULES[activeModuleKey].fields.forEach(field => {
+        const val = formData.get(field.name);
+        if (field.type === 'number') {
+          payloadData[field.name] = Number(val) || 0;
         } else {
-          payloadData[key] = value;
+          payloadData[field.name] = val;
         }
       });
 
-      // Tetapkan satuan kerja terkunci secara otomatis
-      payloadData['satker'] = 'Balai KSDA Kalimantan Timur';
-
-      // If updating, assign ID to payload
-      if (editMode) {
-        payloadData['id'] = editId;
+      if (editModeId) {
+        payloadData['id'] = editModeId;
       }
 
-      // Animasi tombol loading
-      btnSubmit.disabled = true;
-      btnSubmit.innerHTML = '<span class="spinner inline-block mr-2"></span> Mengirim data...';
+      // Tampilkan Loading State pada tombol submit
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnHtml = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Memproses...`;
 
       try {
-        // Mengirim data menggunakan metode POST tanpa kustom Header tambahan untuk menghindari preflight CORS block
+        const action = editModeId ? 'update' : 'create';
         const response = await fetch(GAS_URL, {
           method: 'POST',
           body: JSON.stringify({
-            action: editMode ? 'update' : 'create',
-            module: currentModule,
+            action: action,
+            module: activeModuleKey,
             data: payloadData
           })
         });
 
         const result = await response.json();
-        btnSubmit.disabled = false;
-        btnSubmit.innerHTML = originalBtnText;
-
         if (result.success) {
-          showToast(editMode ? 'Data berhasil diperbarui!' : 'Data berhasil disimpan ke Spreadsheet!', 'success');
+          showNotification(editModeId ? 'Laporan berhasil diperbarui!' : 'Laporan berhasil terkirim ke Spreadsheet!', 'success');
+          editModeId = null;
           form.reset();
-          cancelEditMode();
-          
-          // Reset default values inside fields
-          const config = MODULES_CONFIG[currentModule];
-          generateFormFields(config.fields);
-          
-          // Reload data tabel
-          loadDataFromDatabase(currentModule);
+          renderForm();
+          fetchDatabaseData();
         } else {
-          showToast(`Gagal menyimpan: ${result.error}`, 'error');
+          showNotification(result.error || 'Gagal menyimpan.', 'danger');
         }
       } catch (err) {
-        btnSubmit.disabled = false;
-        btnSubmit.innerHTML = originalBtnText;
-        showToast(`Gagal mengirim data. Pastikan Web App GAS Anda telah dideploy dengan akses "Anyone".`, 'error');
+        showNotification(`Gagal terhubung dengan server: ${err.message}`, 'danger');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
       }
     }
 
-    // Trigger confirm modal
-    function openConfirmModal(id) {
-      targetDeleteId = id;
-      const modal = document.getElementById('customConfirmModal');
-      modal.classList.remove('hidden');
+    function startEdit(id) {
+      const record = databaseRecords.find(r => r.id === id);
+      if (!record) return;
+
+      editModeId = id;
+      renderForm();
+
+      // Isi form dengan data record yang diedit
+      const form = document.getElementById('moduleEntryForm');
+      MODULES[activeModuleKey].fields.forEach(field => {
+        const input = form.querySelector(`[name="${field.name}"]`);
+        if (input) {
+          input.value = record[field.name] !== undefined ? record[field.name] : '';
+        }
+      });
+      
+      // Auto Scroll ke form
+      form.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // EXECUTE DELETE OPERATION (DELETE)
-    async function executeDeleteRow(id) {
-      showToast('Sedang menghapus data...', 'info');
+    function cancelEdit() {
+      editModeId = null;
+      document.getElementById('moduleEntryForm').reset();
+      renderForm();
+    }
+
+    // =================================================================================
+    // DELETE PROCESS USING ACCESSIBLE CUSTOM MODAL
+    // =================================================================================
+    function triggerDelete(id) {
+      deleteTargetId = id;
+      const modal = document.getElementById('deleteModal');
+      modal.classList.remove('hidden');
+      document.getElementById('confirmDeleteBtn').onclick = () => executeDelete();
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('deleteModal').classList.add('hidden');
+      deleteTargetId = null;
+    }
+
+    async function executeDelete() {
+      if (!deleteTargetId) return;
+      const btn = document.getElementById('confirmDeleteBtn');
+      const originalText = btn.innerText;
+      btn.disabled = true;
+      btn.innerText = "Menghapus...";
 
       try {
-        // Mengirim data hapus menggunakan metode POST tanpa kustom Header tambahan untuk menghindari preflight CORS block
         const response = await fetch(GAS_URL, {
           method: 'POST',
           body: JSON.stringify({
             action: 'delete',
-            module: currentModule,
-            id: id
+            module: activeModuleKey,
+            id: deleteTargetId
           })
         });
 
         const result = await response.json();
         if (result.success) {
-          showToast('Data berhasil dihapus!', 'success');
-          if (editId === id) {
-            cancelEditMode();
-          }
-          loadDataFromDatabase(currentModule);
+          showNotification('Data sukses dihapus.', 'success');
+          fetchDatabaseData();
         } else {
-          showToast(`Gagal menghapus: ${result.error}`, 'error');
+          showNotification(result.error || 'Gagal menghapus data.', 'danger');
         }
       } catch (err) {
-        showToast(`Gagal melakukan operasi hapus.`, 'error');
+        showNotification(`Koneksi gagal: ${err.message}`, 'danger');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = originalText;
+        closeDeleteModal();
       }
     }
 
-    // SEARCH FILTER
-    function filterTableData() {
-      const query = document.getElementById('tableSearch').value.toLowerCase();
-      const filtered = dbData.filter(row => {
-        return (row.satker && row.satker.toLowerCase().includes(query)) ||
-               (row.jabatan && row.jabatan.toLowerCase().includes(query)) ||
-               (row.pendidikan && row.pendidikan.toLowerCase().includes(query)) ||
-               (row.fungsi && row.fungsi.toLowerCase().includes(query)) ||
-               (row.pemohon && row.pemohon.toLowerCase().includes(query)) ||
-               (row.kawasan && row.kawasan.toLowerCase().includes(query));
-      });
-      renderTableRows(filtered);
+    // =================================================================================
+    // SYSTEM NOTIFICATIONS & THEME SETTINGS
+    // =================================================================================
+    function showNotification(msg, type = 'success') {
+      const box = document.getElementById('alertBox');
+      const icon = document.getElementById('alertIcon');
+      const text = document.getElementById('alertMessage');
+
+      box.classList.remove('hidden', 'scale-95');
+      box.classList.add('scale-100');
+      text.innerText = msg;
+
+      if (type === 'success') {
+        box.className = "bg-emerald-50 text-emerald-800 border-emerald-200/80 p-4 rounded-xl flex items-start gap-3 border shadow-sm dark:bg-emerald-950/20 dark:text-emerald-400 dark:border-emerald-900/60";
+        icon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400"></i>';
+      } else {
+        box.className = "bg-rose-50 text-rose-800 border-rose-200/80 p-4 rounded-xl flex items-start gap-3 border shadow-sm dark:bg-rose-950/20 dark:text-rose-400 dark:border-rose-900/60";
+        icon.innerHTML = '<i class="fa-solid fa-circle-xmark text-rose-600 dark:text-rose-400"></i>';
+      }
+
+      setTimeout(() => {
+        hideAlert();
+      }, 7000);
     }
 
-    // TOAST NOTIFICATION GENERATOR
-    function showToast(message, type = 'success') {
-      const toast = document.createElement('div');
-      const colors = {
-        success: '#10B981', 
-        error: '#EF4444', 
-        warning: '#F59E0B', 
-        info: '#0EA5E9'
-      };
-      
-      toast.style.cssText = `
-        position: fixed; bottom: 24px; right: 24px; z-index: 9999;
-        background: var(--bg-card); color: var(--text-primary);
-        border: 1px solid ${colors[type]}40; border-left: 4px solid ${colors[type]};
-        padding: 14px 22px; border-radius: var(--radius-md);
-        font-size: 14px; font-weight: 600;
-        box-shadow: var(--shadow-lg);
-        animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
-        max-width: 350px;
-        display: flex; align-items: center; gap: 10px;
-      `;
+    function hideAlert() {
+      const box = document.getElementById('alertBox');
+      box.classList.add('scale-95');
+      setTimeout(() => {
+        box.classList.add('hidden');
+      }, 150);
+    }
 
-      let icon = '<i class="fa-solid fa-circle-check" style="color: #10B981;"></i>';
-      if (type === 'error') icon = '<i class="fa-solid fa-circle-xmark" style="color: #EF4444;"></i>';
-      if (type === 'warning') icon = '<i class="fa-solid fa-triangle-exclamation" style="color: #F59E0B;"></i>';
-      if (type === 'info') icon = '<i class="fa-solid fa-circle-info" style="color: #0EA5E9;"></i>';
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateThemeUI(isDark);
+    }
 
-      toast.innerHTML = `${icon} <span>${message}</span>`;
-      
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes slideIn  { from { transform: translateX(100%); opacity:0; } to { transform: translateX(0); opacity:1; } }
-        @keyframes fadeOut  { to   { opacity: 0; transform: translateX(15px); } }
-      `;
-      document.head.appendChild(style);
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 3000);
+    function updateThemeUI(isDark) {
+      const icon = document.getElementById('themeIcon');
+      const btn = document.getElementById('themeToggleBtn');
+      if (isDark) {
+        icon.className = "fa-solid fa-sun text-lg text-yellow-400";
+        btn.title = "Ubah ke Mode Terang";
+      } else {
+        icon.className = "fa-solid fa-moon text-lg text-indigo-400";
+        btn.title = "Ubah ke Mode Gelap";
+      }
     }
   </script>
 </body>
