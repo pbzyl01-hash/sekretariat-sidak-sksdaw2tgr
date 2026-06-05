@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sekretariat SIDAK - Seksi KSDA Wilayah II Tenggarong</title>
+  <title>SIDAK KSDAE - Seksi KSDA Wilayah II Tenggarong</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Google Fonts -->
@@ -74,15 +75,31 @@
             DATA SEKRETARIAT
           </h1>
           <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5">
-            SIDAK KSDAE • 2026
+            SIDAK KSDAE
           </p>
         </div>
       </div>
 
-      <!-- RIGHT: Dark Mode Toggle -->
-      <button id="themeToggleBtn" onclick="toggleTheme()" class="w-9 h-9 flex items-center justify-center rounded-full text-slate-400 hover:bg-slate-800 transition-all focus:outline-none" title="Ubah Tema">
-        <i class="fa-solid fa-moon text-base" id="themeIcon"></i>
-      </button>
+      <!-- RIGHT: Waktu + Drive + Dark Mode -->
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <!-- Live Clock -->
+        <div class="hidden sm:flex flex-col items-end mr-1">
+          <span id="liveClock" class="text-base font-mono font-bold text-sky-400 leading-tight animate-pulse-glow"></span>
+          <span id="liveDate" class="text-[10px] text-slate-400 uppercase tracking-wide"></span>
+        </div>
+        <!-- Google Drive Link -->
+        <a href="https://docs.google.com/spreadsheets/d/1z9nRSsij3Nc_NojwPclaO7TDqSglQB2AXhTXiAdqv0s/edit?usp=sharing"
+           target="_blank" rel="noopener"
+           class="flex items-center gap-1.5 bg-emerald-700/30 hover:bg-emerald-700/50 border border-emerald-600/40 text-emerald-300 text-xs font-semibold px-3 py-2 rounded-xl transition-all"
+           title="Buka Google Spreadsheet Database">
+          <i class="fa-brands fa-google-drive text-sm"></i>
+          <span class="hidden md:inline">Arsip Google Drive</span>
+        </a>
+        <!-- Dark Mode Toggle -->
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="w-9 h-9 flex items-center justify-center rounded-full text-slate-400 hover:bg-slate-800 transition-all focus:outline-none" title="Ubah Tema">
+          <i class="fa-solid fa-moon text-base" id="themeIcon"></i>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -161,9 +178,14 @@
           <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 dark:text-white" id="databaseTableTitle">
             Database: F01_Jabatan
           </h2>
-          <button onclick="fetchDatabaseData()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 py-1.5 px-3 rounded-lg font-semibold flex items-center gap-1.5 transition dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-300">
-            <i class="fa-solid fa-sync" id="refreshBtnIcon"></i> Segarkan Data
-          </button>
+          <div class="flex items-center gap-2">
+            <button onclick="fetchDatabaseData()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 py-1.5 px-3 rounded-lg font-semibold flex items-center gap-1.5 transition dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-300">
+              <i class="fa-solid fa-sync" id="refreshBtnIcon"></i> Segarkan Data
+            </button>
+            <button onclick="downloadExcel()" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white py-1.5 px-3 rounded-lg font-semibold flex items-center gap-1.5 transition shadow-sm">
+              <i class="fa-solid fa-file-excel"></i> Unduh Excel
+            </button>
+          </div>
         </div>
 
         <!-- Scrollable Table -->
@@ -848,6 +870,44 @@
           box.classList.add('hidden');
         }, 150);
       }
+    }
+
+    // ── LIVE CLOCK ──────────────────────────────────────────────────────────
+    function updateClock() {
+      const now = new Date();
+      const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+      const months = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+      const h = String(now.getHours()).padStart(2,'0');
+      const m = String(now.getMinutes()).padStart(2,'0');
+      const s = String(now.getSeconds()).padStart(2,'0');
+      document.getElementById('liveClock').textContent = `${h}:${m}:${s}`;
+      document.getElementById('liveDate').textContent =
+        `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // ── UNDUH EXCEL ─────────────────────────────────────────────────────────
+    function downloadExcel() {
+      if (!databaseRecords || databaseRecords.length === 0) {
+        showNotification('Tidak ada data untuk diunduh. Muat data terlebih dahulu.', 'warning');
+        return;
+      }
+      const mod = MODULES[activeModuleKey];
+      const sheetName = `${mod.code}_${mod.name}`.substring(0, 31);
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(databaseRecords);
+
+      // Auto column width
+      const colWidths = Object.keys(databaseRecords[0]).map(key => ({
+        wch: Math.max(key.length, ...databaseRecords.map(r => String(r[key]||'').length), 10)
+      }));
+      ws['!cols'] = colWidths;
+
+      XLSX.utils.book_append_sheet(wb, ws, sheetName);
+      const fileName = `Rekap_${mod.code}_${mod.name}_${new Date().toISOString().slice(0,10)}.xlsx`;
+      XLSX.writeFile(wb, fileName);
+      showNotification(`File "${fileName}" berhasil diunduh.`, 'success');
     }
 
     function toggleTheme() {
