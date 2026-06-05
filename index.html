@@ -208,7 +208,7 @@
     // API INTEGRATION & LOCAL DATA STORAGE
     // =================================================================================
     // Tempelkan URL deployment Web App Google Apps Script Anda di sini.
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbw2kBn_5d8QrVbhvMYbC2hmV6ZqrqvbKTQV_dLs-EtZgjp8WoxQVKJQqkzD-8b76_jLxg/exec';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwQxxVw4j7cUa6khW6HNdzyhtvoBUxjFWYBZeibJLEgId0XaZtd6Vh0dLGODpUXRaLuKw/exec';
 
     // Konfigurasi Metadata Modul
     const MODULES = {
@@ -602,7 +602,10 @@
       dbTitle.innerText = `Database: ${mod.code}_${mod.name.replace(/[^A-Za-z0-9]/g, '')}`;
 
       try {
-        const response = await fetch(`${GAS_URL}?action=getAll&module=${activeModuleKey}`);
+        const response = await fetch(`${GAS_URL}?action=getAll&module=${activeModuleKey}`, {
+          method: 'GET',
+          redirect: 'follow'
+        });
         const result = await response.json();
         
         if (result.success) {
@@ -698,8 +701,10 @@
 
       try {
         const action = editModeId ? 'update' : 'create';
+        // FIX CORS: GAS memerlukan Content-Type text/plain agar tidak trigger preflight
         const response = await fetch(GAS_URL, {
           method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
             action: action,
             module: activeModuleKey,
@@ -774,8 +779,10 @@
       btn.innerText = "Menghapus...";
 
       try {
+        // FIX CORS: GAS memerlukan Content-Type text/plain
         const response = await fetch(GAS_URL, {
           method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
             action: 'delete',
             module: activeModuleKey,
