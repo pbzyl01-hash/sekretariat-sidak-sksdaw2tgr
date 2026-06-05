@@ -408,17 +408,16 @@
         period: 'monthly',
         fields: [
           { name: 'Tahun', label: 'Tahun', type: 'number', placeholder: '2026', required: true },
-          { name: 'Periode', label: 'Periode', type: 'text', value: 'Bulanan', readonly: true },
-          { name: 'Satuan Kerja', label: 'Satuan Kerja', type: 'text', value: 'Balai KSDA Kalimantan Timur', readonly: true },
-          { name: 'Bulan', label: 'Bulan Laporan', type: 'select', options: [
+          { name: 'Periode', label: 'Bulan Laporan', type: 'select', options: [
             'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-          ]},
+          ], required: true },
+          { name: 'Satuan Kerja', label: 'Satuan Kerja', type: 'text', value: 'Balai KSDA Kalimantan Timur', readonly: true },
           { name: 'Kawasan Konservasi', label: 'Kawasan Konservasi (SIMAK)', type: 'select', options: [
             '100214160 - CA Muara Kaman Sedulang',
             '100214161 - CA Padang Luwai',
             '100224092 - SM Kelian',
             '100254146 - TWA Padang Luwai'
-          ]},
+          ], required: true },
           { name: 'Penelitian dan Pengembangan (DN)', label: 'Litbang - Dalam Negeri (Orang)', type: 'number', value: 0 },
           { name: 'Penelitian dan Pengembangan (LN)', label: 'Litbang - Luar Negeri (Orang)', type: 'number', value: 0 },
           { name: 'Pendidikan dan Ilmu Pengetahuan (DN)', label: 'Pendidikan - Dalam Negeri (Orang)', type: 'number', value: 0 },
@@ -503,6 +502,9 @@
       fetchDatabaseData();
     }
 
+    // =================================================================================
+    // FILTER MANAGEMENT
+    // =================================================================================
     function setPeriodFilter(filter) {
       currentFilter = filter;
       ['all', 'monthly', 'yearly'].forEach(f => {
@@ -616,6 +618,7 @@
       }
     }
 
+    // Dynamic, high-fidelity data layout rendering (numbers right-aligned and monospaced)
     function renderDatabaseTable() {
       const table = document.getElementById('databaseTable');
       const placeholder = document.getElementById('noDataPlaceholder');
@@ -632,18 +635,23 @@
       // Setup headers
       let headerHtml = '<thead><tr class="bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">';
       mod.fields.forEach(f => {
-        headerHtml += `<th class="p-3 font-bold text-slate-500 dark:text-slate-400 truncate max-w-[150px]" title="${f.label}">${f.label}</th>`;
+        const isNum = f.type === 'number';
+        headerHtml += `<th class="p-3 font-bold text-slate-500 dark:text-slate-400 truncate max-w-[150px] ${isNum ? 'text-right' : 'text-left'}" title="${f.label}">${f.label}</th>`;
       });
       headerHtml += `<th class="p-3 font-bold text-slate-500 dark:text-slate-400 text-right">Aksi</th></tr></thead>`;
       table.innerHTML += headerHtml;
 
-      // Setup body rows
+      // Setup body rows with right alignment styling for metrics and integers
       let bodyHtml = '<tbody>';
       databaseRecords.forEach(row => {
         bodyHtml += `<tr class="border-b border-slate-100 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/40 transition">`;
         mod.fields.forEach(f => {
           const value = row[f.name] !== undefined ? row[f.name] : '';
-          bodyHtml += `<td class="p-3 text-slate-700 dark:text-slate-300 font-medium truncate max-w-[200px]" title="${value}">${value}</td>`;
+          const isNum = f.type === 'number';
+          bodyHtml += `
+            <td class="p-3 text-slate-700 dark:text-slate-300 font-medium truncate max-w-[200px] ${isNum ? 'text-right font-mono text-emerald-600 dark:text-emerald-400' : 'text-left'}" title="${value}">
+              ${value}
+            </td>`;
         });
         
         // Action column using modern beautiful icon triggers
@@ -816,12 +824,15 @@
       }, 7000);
     }
 
+    // Slide-out/scale transition for user warnings
     function hideAlert() {
       const box = document.getElementById('alertBox');
-      box.classList.add('scale-95');
-      setTimeout(() => {
-        box.classList.add('hidden');
-      }, 150);
+      if (box) {
+        box.classList.add('scale-95');
+        setTimeout(() => {
+          box.classList.add('hidden');
+        }, 150);
+      }
     }
 
     function toggleTheme() {
