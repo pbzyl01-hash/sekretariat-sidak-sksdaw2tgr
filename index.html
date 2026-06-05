@@ -161,6 +161,26 @@
 </head>
 <body class="min-height-screen pb-16">
 
+  <!-- BANNER PETUNJUK SETUP (Akan muncul jika URL GAS masih bawaan/placeholder) -->
+  <div id="setupAssistantBanner" class="hidden bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-amber-500/20 border-b border-amber-500/30 py-4 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-500 flex items-center justify-center shrink-0 mt-0.5">
+          <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-amber-500">Asisten Konfigurasi Terdeteksi</h4>
+          <p class="text-xs text-slate-400 mt-0.5">Anda melihat pesan ini karena <code class="bg-black/30 px-1 py-0.5 rounded text-amber-400">GAS_URL</code> di dalam file HTML Anda masih menggunakan nilai default. Ikuti petunjuk di bawah untuk menghubungkan database Anda.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 shrink-0">
+        <a href="https://script.google.com" target="_blank" class="px-3 py-1.5 text-xs font-bold rounded-md bg-amber-500 hover:bg-amber-600 text-white transition-all flex items-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Google Apps Script
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- NAV BAR -->
   <nav class="sticky top-0 z-40 w-full backdrop-blur-md bg-opacity-80 border-b transition-colors duration-200" style="background-color: rgba(var(--bg-card), 0.8); border-color: var(--border);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -417,7 +437,7 @@
 
   <!-- JAVASCRIPT CONTROLLER -->
   <script>
-    // URL Google Apps Script Web App (Wajib diganti setelah deploy di Google Script)
+    // URL Google Apps Script Web App (PASTIKAN UNTUK MENGGANTI URL DI BAWAH DENGAN URL DEPLOYMENT ANDA)
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbwL5mPkPXUnsKPQ-_OasSdlMP-0CqyPQkQ5c3jHMfbCghFowB5vrRAf1wOzUNmB4hdV1Q/exec'; 
 
     // Current State Management
@@ -551,8 +571,20 @@
     document.addEventListener('DOMContentLoaded', () => {
       initTheme();
       initConfirmModal();
+      checkGasUrlConfiguration();
       switchModule('F08'); // load default module
     });
+
+    // Melakukan pengecekan apakah user masih menggunakan URL placeholder bawaan template
+    function checkGasUrlConfiguration() {
+      const banner = document.getElementById('setupAssistantBanner');
+      // Mendeteksi jika URL masih bawaan template awal
+      if (GAS_URL.includes('AKfycby3jC5v1t9g3wN0fE_eRCH9SgqO6k-U70gqf7tTzqf-wYqD_5fF8D8F') || GAS_URL.trim() === '' || GAS_URL.includes('URL_AKSES_DI_SINI')) {
+        banner.classList.remove('hidden');
+      } else {
+        banner.classList.add('hidden');
+      }
+    }
 
     // Theme Management (Light / Dark Mode)
     function initTheme() {
@@ -935,6 +967,7 @@
       btnSubmit.innerHTML = '<span class="spinner inline-block mr-2"></span> Mengirim data...';
 
       try {
+        // Mengirim data menggunakan metode POST tanpa kustom Header tambahan untuk menghindari preflight CORS block
         const response = await fetch(GAS_URL, {
           method: 'POST',
           body: JSON.stringify({
@@ -965,7 +998,7 @@
       } catch (err) {
         btnSubmit.disabled = false;
         btnSubmit.innerHTML = originalBtnText;
-        showToast(`Gagal mengirim data. Silakan coba kembali.`, 'error');
+        showToast(`Gagal mengirim data. Pastikan Web App GAS Anda telah dideploy dengan akses "Anyone".`, 'error');
       }
     }
 
@@ -981,6 +1014,7 @@
       showToast('Sedang menghapus data...', 'info');
 
       try {
+        // Mengirim data hapus menggunakan metode POST tanpa kustom Header tambahan untuk menghindari preflight CORS block
         const response = await fetch(GAS_URL, {
           method: 'POST',
           body: JSON.stringify({
